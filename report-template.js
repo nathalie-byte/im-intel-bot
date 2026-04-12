@@ -22,19 +22,17 @@ const URGENCY_CONFIG = {
 };
 
 function coverPhotoGrid(schools) {
-  const queries = [
-    'fashion+editorial+student', 'fashion+design+school', 'runway+fashion+show',
-    'fashion+styling+editorial', 'fashion+business+miami', 'design+student+workshop',
-    'fashion+photography+editorial', 'fashion+collection+runway', 'textile+design+fashion',
-    'fashion+show+backstage', 'fashion+week+street+style', 'luxury+fashion+editorial',
-    'fashion+illustration+design', 'fashion+marketing+digital', 'fashion+accessories+editorial',
-    'fashion+portfolio+design', 'fashion+trend+editorial', 'fashion+model+editorial'
+  // Curated Picsum IDs that look editorial/fashion — works from any server, no API key
+  const picsumIds = [
+    1005, 1006, 1011, 1013, 1015, 1016,
+    1018, 1019, 1021, 1023, 1024, 1025,
+    1027, 1028, 1029, 1031, 1033, 1035
   ];
-  return queries.map((q, i) =>
+  return picsumIds.map((id) =>
     `<div style="background:#f0f0f0;overflow:hidden;aspect-ratio:1;">
-      <img src="https://source.unsplash.com/200x200/?${q}&sig=${i}" 
-           style="width:100%;height:100%;object-fit:cover;" 
-           onerror="this.parentElement.style.background='#e0e0e0'" />
+      <img src="https://picsum.photos/id/${id}/200/200" 
+           style="width:100%;height:100%;object-fit:cover;"
+           onerror="this.parentElement.style.background='#e8e8e8'" />
     </div>`
   ).join('');
 }

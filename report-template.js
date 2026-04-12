@@ -22,15 +22,31 @@ const URGENCY_CONFIG = {
 };
 
 function coverPhotoGrid(schools) {
-  // Curated Picsum IDs that look editorial/fashion — works from any server, no API key
-  const picsumIds = [
-    1005, 1006, 1011, 1013, 1015, 1016,
-    1018, 1019, 1021, 1023, 1024, 1025,
-    1027, 1028, 1029, 1031, 1033, 1035
+  // These are direct Unsplash photo URLs — fashion editorial, students, runway, design
+  // Using direct photo URLs that are publicly accessible
+  const photos = [
+    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&h=200&fit=crop',
+    'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=200&h=200&fit=crop',
+    'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=200&h=200&fit=crop',
+    'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=200&h=200&fit=crop',
+    'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=200&h=200&fit=crop',
+    'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=200&h=200&fit=crop',
+    'https://images.unsplash.com/photo-1562157873-818bc0726f68?w=200&h=200&fit=crop',
+    'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=200&h=200&fit=crop',
+    'https://images.unsplash.com/photo-1551803091-e20673f15770?w=200&h=200&fit=crop',
+    'https://images.unsplash.com/photo-1544441893-675973e31985?w=200&h=200&fit=crop',
+    'https://images.unsplash.com/photo-1445205170230-053b83016050?w=200&h=200&fit=crop',
+    'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=200&h=200&fit=crop',
+    'https://images.unsplash.com/photo-1467043237213-65f2da53396f?w=200&h=200&fit=crop',
+    'https://images.unsplash.com/photo-1475180098004-ca77a66827be?w=200&h=200&fit=crop',
+    'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=200&h=200&fit=crop',
+    'https://images.unsplash.com/photo-1520367445093-50dc08a59d9d?w=200&h=200&fit=crop',
+    'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=200&h=200&fit=crop',
+    'https://images.unsplash.com/photo-1566206091558-7f218b696731?w=200&h=200&fit=crop',
   ];
-  return picsumIds.map((id) =>
+  return photos.map((url) =>
     `<div style="background:#f0f0f0;overflow:hidden;aspect-ratio:1;">
-      <img src="https://picsum.photos/id/${id}/200/200" 
+      <img src="${url}" 
            style="width:100%;height:100%;object-fit:cover;"
            onerror="this.parentElement.style.background='#e8e8e8'" />
     </div>`

@@ -1,8 +1,8 @@
 const SCHOOL_CONFIG = {
-  mdc:     { name: 'Miami Fashion Institute', short: 'MDC', accent: '#C0392B', light: '#FDF3F2', unsplash: 'fashion+miami+design' },
-  fit:     { name: 'FIT New York',            short: 'FIT', accent: '#1A3A5C', light: '#EBF2FA', unsplash: 'fashion+new+york+runway' },
-  scad:    { name: 'SCAD',                    short: 'SCAD',accent: '#1A4731', light: '#E8F5EE', unsplash: 'fashion+design+savannah' },
-  parsons: { name: 'Parsons School of Design',short: 'PAR', accent: '#2C2C2C', light: '#F0F0F0', unsplash: 'parsons+fashion+design' },
+  mdc:     { name: 'Miami Fashion Institute', short: 'MDC', accent: '#C0392B', light: '#FDF3F2', logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/3/39/Miami_Dade_College_logo.svg/320px-Miami_Dade_College_logo.svg.png' },
+  fit:     { name: 'FIT New York',            short: 'FIT', accent: '#1A3A5C', light: '#EBF2FA', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/FIT_NYC_logo.svg/320px-FIT_NYC_logo.svg.png' },
+  scad:    { name: 'SCAD',                    short: 'SCAD',accent: '#1A4731', light: '#E8F5EE', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/SCAD_logo.svg/320px-SCAD_logo.svg.png' },
+  parsons: { name: 'Parsons School of Design',short: 'PAR', accent: '#2C2C2C', light: '#F0F0F0', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/New_School_logo.svg/320px-New_School_logo.svg.png' },
 };
 
 const PLATFORM_CONFIG = {
@@ -123,6 +123,7 @@ export function generateReportHTML(report) {
         <div style="display:flex;align-items:flex-end;justify-content:space-between;">
           <div>
             <div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#aaa;margin-bottom:6px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">Competitor Analysis</div>
+            ${sc.logo ? `<img src="${sc.logo}" style="height:36px;width:auto;object-fit:contain;margin-bottom:8px;opacity:0.85;" onerror="this.style.display='none'" /><br>` : ''}
             <div style="font-size:28px;font-weight:700;color:#1a1a1a;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">${school.name}</div>
           </div>
           <div style="display:flex;gap:32px;text-align:right;">

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IM Miami · Intelligence Bot</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: #0a0a08;
+      color: #f0ece4;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+    }
+
+    .container { max-width: 580px; width: 100%; }
+
+    .eyebrow {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #d4a853;
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px;
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: #d4a853;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 48px;
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .stat-card {
+      background: #141412;
+      border: 1px solid #222;
+      border-radius: 10px;
+      padding: 20px 22px;
+    }
+
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      color: #f0ece4;
+    }
+
+    .stat-value.gold { color: #d4a853; }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #1e1e1a;
+      margin: 32px 0;
+    }
+
+    .schedule-info {
+      background: #141412;
+      border: 1px solid #1e1e1a;
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-bottom: 24px;
+    }
+
+    .schedule-info h3 {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #d4a853;
+      margin-bottom: 12px;
+    }
+
+    .schedule-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #1e1e1a;
+      font-size: 13px;
+    }
+
+    .schedule-row:last-child { border-bottom: none; }
+    .schedule-row span:first-child { color: #666; }
+    .schedule-row span:last-child { color: #f0ece4; font-weight: 500; }
+
+    .trigger-section { margin-bottom: 32px; }
+
+    .trigger-section h3 {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 12px;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 14px 24px;
+      border-radius: 8px;
+      font-family: 'Jost', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+      text-decoration: none;
+      border: none;
+    }
+
+    .btn-primary {
+      background: #d4a853;
+      color: #0a0a08;
+    }
+
+    .btn-primary:hover { background: #e0b865; }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .status-msg {
+      margin-top: 12px;
+      font-size: 13px;
+      text-align: center;
+      min-height: 20px;
+      color: #888;
+    }
+
+    .status-msg.success { color: #4ade80; }
+    .status-msg.error { color: #f87171; }
+
+    .schools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .school-tag {
+      font-size: 11px;
+      padding: 4px 12px;
+      border: 1px solid #222;
+      border-radius: 20px;
+      color: #666;
+      font-weight: 400;
+    }
+
+    .footer {
+      margin-top: 48px;
+      text-align: center;
+      font-size: 11px;
+      color: #333;
+      letter-spacing: 0.5px;
+    }
+
+    #uptime { font-variant-numeric: tabular-nums; }
+
+    .dot {
+      display: inline-block;
+      width: 7px; height: 7px;
+      background: #4ade80;
+      border-radius: 50%;
+      margin-right: 6px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="eyebrow">Istituto Marangoni Miami</div>
+    <h1>Competitor <em>Intelligence</em><br>Daily Briefing</h1>
+    <p class="subtitle">Automated tracking of MDC, FIT, SCAD & Parsons across Instagram, LinkedIn, TikTok, press, and more.</p>
+
+    <div class="status-grid">
+      <div class="stat-card">
+        <div class="stat-label">Service status</div>
+        <div class="stat-value"><span class="dot"></span>Running</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Uptime</div>
+        <div class="stat-value gold" id="uptime">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Schools tracked</div>
+        <div class="stat-value">4</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Platforms monitored</div>
+        <div class="stat-value">7</div>
+      </div>
+    </div>
+
+    <div class="schedule-info">
+      <h3>Schedule</h3>
+      <div class="schedule-row"><span>Frequency</span><span>Weekdays only (Mon–Fri)</span></div>
+      <div class="schedule-row"><span>Delivery time</span><span>8:00 AM Eastern</span></div>
+      <div class="schedule-row"><span>Format</span><span>HTML Email via SendGrid</span></div>
+      <div class="schedule-row"><span>Data source</span><span>Live web search (Anthropic)</span></div>
+    </div>
+
+    <div class="trigger-section">
+      <h3>Manual Trigger</h3>
+      <button class="btn btn-primary" id="run-btn" onclick="triggerReport()">
+        Generate &amp; Send Report Now
+      </button>
+      <div class="status-msg" id="status-msg"></div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="schools">
+      <span class="school-tag">Miami Fashion Institute (MDC)</span>
+      <span class="school-tag">FIT New York</span>
+      <span class="school-tag">SCAD</span>
+      <span class="school-tag">Parsons School of Design</span>
+    </div>
+
+    <div class="footer">
+      Intelligence Unit · Auto-generated reports · Not for external distribution
+    </div>
+  </div>
+
+  <script>
+    async function updateUptime() {
+      try {
+        const r = await fetch('/health');
+        const d = await r.json();
+        const s = Math.floor(d.uptime);
+        const h = Math.floor(s / 3600);
+        const m = Math.floor((s % 3600) / 60);
+        document.getElementById('uptime').textContent = h > 0 ? `${h}h ${m}m` : `${m}m`;
+      } catch(e) {}
+    }
+
+    async function triggerReport() {
+      const btn = document.getElementById('run-btn');
+      const msg = document.getElementById('status-msg');
+      btn.disabled = true;
+      btn.textContent = 'Generating report…';
+      msg.className = 'status-msg';
+      msg.textContent = 'Searching all platforms — this takes about 30 seconds…';
+
+      try {
+        const r = await fetch('/api/run-report', { method: 'POST' });
+        const d = await r.json();
+        if (d.success) {
+          msg.className = 'status-msg success';
+          msg.textContent = '✓ Report generated and sent successfully.';
+        } else {
+          throw new Error(d.error);
+        }
+      } catch(e) {
+        msg.className = 'status-msg error';
+        msg.textContent = '✗ Error: ' + (e.message || 'Unknown error');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Generate & Send Report Now';
+      }
+    }
+
+    updateUptime();
+    setInterval(updateUptime, 30000);
+  </script>
+</body>
+</html>

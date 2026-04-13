@@ -1,8 +1,8 @@
 const SCHOOL_CONFIG = {
-  mdc:     { name: 'Miami Fashion Institute', short: 'MDC', accent: '#C0392B', light: '#FDF3F2', logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/3/39/Miami_Dade_College_logo.svg/320px-Miami_Dade_College_logo.svg.png' },
-  fit:     { name: 'FIT New York',            short: 'FIT', accent: '#1A3A5C', light: '#EBF2FA', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/FIT_NYC_logo.svg/320px-FIT_NYC_logo.svg.png' },
-  scad:    { name: 'SCAD',                    short: 'SCAD',accent: '#1A4731', light: '#E8F5EE', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/SCAD_logo.svg/320px-SCAD_logo.svg.png' },
-  parsons: { name: 'Parsons School of Design',short: 'PAR', accent: '#2C2C2C', light: '#F0F0F0', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/New_School_logo.svg/320px-New_School_logo.svg.png' },
+  mdc:     { name: 'Miami Fashion Institute', short: 'MDC', accent: '#C0392B', logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/3/39/Miami_Dade_College_logo.svg/320px-Miami_Dade_College_logo.svg.png' },
+  fit:     { name: 'FIT New York',            short: 'FIT', accent: '#1A3A5C', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/FIT_NYC_logo.svg/320px-FIT_NYC_logo.svg.png' },
+  scad:    { name: 'SCAD',                    short: 'SCAD',accent: '#1A4731', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/SCAD_logo.svg/320px-SCAD_logo.svg.png' },
+  parsons: { name: 'Parsons School of Design',short: 'PAR', accent: '#2C2C2C', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/New_School_logo.svg/320px-New_School_logo.svg.png' },
 };
 
 const PLATFORM_CONFIG = {
@@ -14,6 +14,7 @@ const PLATFORM_CONFIG = {
   newsletter: { label: 'Newsletter', color: '#4A4A4A' },
   website:    { label: 'Website',    color: '#222222' },
 };
+
 const PROGRAM_CONFIG = {
   fashion_design:    { label: 'Fashion Design',        color: '#8B1A1A', bg: '#FDF0F0' },
   fashion_business:  { label: 'Fashion Business',      color: '#1A3A6B', bg: '#EEF3FB' },
@@ -29,9 +30,7 @@ const URGENCY_CONFIG = {
   low:    { label: 'NOTE',          color: '#27AE60', bg: '#EAFAF1', border: '#27AE60' },
 };
 
-function coverPhotoGrid(schools) {
-  // These are direct Unsplash photo URLs — fashion editorial, students, runway, design
-  // Using direct photo URLs that are publicly accessible
+function coverPhotoGrid() {
   const photos = [
     'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&h=200&fit=crop',
     'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=200&h=200&fit=crop',
@@ -45,341 +44,237 @@ function coverPhotoGrid(schools) {
     'https://images.unsplash.com/photo-1544441893-675973e31985?w=200&h=200&fit=crop',
     'https://images.unsplash.com/photo-1445205170230-053b83016050?w=200&h=200&fit=crop',
     'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=200&h=200&fit=crop',
-    'https://images.unsplash.com/photo-1467043237213-65f2da53396f?w=200&h=200&fit=crop',
-    'https://images.unsplash.com/photo-1475180098004-ca77a66827be?w=200&h=200&fit=crop',
-    'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=200&h=200&fit=crop',
-    'https://images.unsplash.com/photo-1520367445093-50dc08a59d9d?w=200&h=200&fit=crop',
-    'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=200&h=200&fit=crop',
-    'https://images.unsplash.com/photo-1566206091558-7f218b696731?w=200&h=200&fit=crop',
   ];
-  return photos.map((url) =>
-    `<div style="background:#f0f0f0;overflow:hidden;aspect-ratio:1;">
-      <img src="${url}" 
-           style="width:100%;height:100%;object-fit:cover;"
-           onerror="this.parentElement.style.background='#e8e8e8'" />
-    </div>`
+  return photos.map(url =>
+    '<div style="background:#f0f0f0;overflow:hidden;aspect-ratio:1;">' +
+    '<img src="' + url + '" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background=\'#e8e8e8\'" />' +
+    '</div>'
   ).join('');
 }
 
 function activityCard(item) {
   const p = PLATFORM_CONFIG[item.platform] || { color: '#555', label: item.platform };
   const prog = PROGRAM_CONFIG[item.program] || PROGRAM_CONFIG.general;
-  return `
-  <div style="border:1px solid #e8e8e8;border-left:3px solid ${p.color};padding:18px;margin-bottom:12px;background:#fff;">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-      <div style="display:flex;gap:6px;flex-wrap:wrap;">
-        <span style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${p.color};font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">${p.label}</span>
-        <span style="font-size:8px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;background:${prog.bg};color:${prog.color};padding:2px 7px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">${prog.label}</span>
-      </div>
-      <span style="font-size:10px;color:#aaa;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">${item.time || 'Recent'}</span>
-    </div>
-    <div style="font-size:13px;font-weight:700;color:#1a1a1a;line-height:1.4;margin-bottom:6px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">${item.title || ''}</div>
-    <div style="font-size:12px;color:#666;line-height:1.7;margin-bottom:10px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">${item.snippet || ''}</div>
-    <div style="display:flex;justify-content:space-between;align-items:center;">
-      <span style="font-size:10px;color:#bbb;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">${item.engagement && item.engagement !== 'N/A' ? '↑ ' + item.engagement : ''}</span>
-      ${item.url ? `<a href="${item.url}" style="font-size:10px;font-weight:700;color:${p.color};text-decoration:none;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:0.5px;">VIEW →</a>` : ''}
-    </div>
-  </div>`;
+  return '<div style="border:1px solid #e8e8e8;border-left:3px solid ' + p.color + ';padding:18px;margin-bottom:12px;background:#fff;">' +
+    '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">' +
+      '<div style="display:flex;gap:6px;flex-wrap:wrap;">' +
+        '<span style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:' + p.color + ';font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;">' + p.label + '</span>' +
+        '<span style="font-size:8px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;background:' + prog.bg + ';color:' + prog.color + ';padding:2px 7px;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;">' + prog.label + '</span>' +
+      '</div>' +
+      '<span style="font-size:10px;color:#aaa;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;flex-shrink:0;margin-left:8px;">' + (item.time || 'Recent') + '</span>' +
+    '</div>' +
+    '<div style="font-size:13px;font-weight:700;color:#1a1a1a;line-height:1.4;margin-bottom:6px;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;">' + (item.title || '') + '</div>' +
+    '<div style="font-size:12px;color:#666;line-height:1.7;margin-bottom:10px;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;">' + (item.snippet || '') + '</div>' +
+    '<div style="display:flex;justify-content:space-between;align-items:center;">' +
+      '<span style="font-size:10px;color:#bbb;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;">' + (item.engagement && item.engagement !== 'N/A' ? '↑ ' + item.engagement : '') + '</span>' +
+      (item.url ? '<a href="' + item.url + '" style="font-size:10px;font-weight:700;color:' + p.color + ';text-decoration:none;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;letter-spacing:0.5px;">VIEW →</a>' : '') +
+    '</div>' +
+  '</div>';
 }
 
 function insightCard(h, index) {
   const u = URGENCY_CONFIG[h.urgency] || URGENCY_CONFIG.low;
   const num = String(index + 1).padStart(2, '0');
-  return `
-  <div style="display:flex;gap:16px;padding:20px;background:${u.bg};border-left:3px solid ${u.border};margin-bottom:10px;">
-    <div style="font-size:28px;font-weight:700;color:${u.color};opacity:0.25;line-height:1;flex-shrink:0;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">${num}</div>
-    <div style="flex:1;">
-      <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:${u.color};margin-bottom:5px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">${u.label} · ${h.school}</div>
-      <div style="font-size:15px;font-weight:700;color:#1a1a1a;line-height:1.3;margin-bottom:6px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">${h.headline}</div>
-      <div style="font-size:12px;color:#555;line-height:1.7;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">${h.detail}</div>
-    </div>
-  </div>`;
+  return '<div style="display:flex;gap:16px;padding:20px;background:' + u.bg + ';border-left:3px solid ' + u.border + ';margin-bottom:10px;">' +
+    '<div style="font-size:28px;font-weight:700;color:' + u.color + ';opacity:0.25;line-height:1;flex-shrink:0;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;">' + num + '</div>' +
+    '<div style="flex:1;">' +
+      '<div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:' + u.color + ';margin-bottom:5px;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;">' + u.label + ' · ' + h.school + '</div>' +
+      '<div style="font-size:15px;font-weight:700;color:#1a1a1a;line-height:1.3;margin-bottom:6px;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;">' + h.headline + '</div>' +
+      '<div style="font-size:12px;color:#555;line-height:1.7;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;">' + h.detail + '</div>' +
+    '</div>' +
+  '</div>';
 }
 
-function bubbleChartData(schools) {
-  return schools.map((school, i) => {
+function programActivityGrid(program_activity) {
+  if (!program_activity) return '';
+  const programs = ['fashion_design', 'fashion_business', 'fashion_styling', 'interior_design', 'beauty_fragrances'];
+  const cards = programs.map(key => {
+    const pc = PROGRAM_CONFIG[key] || PROGRAM_CONFIG.general;
+    const school = program_activity[key] || '—';
+    return '<div style="border-top:2px solid ' + pc.color + ';padding:14px 12px;background:' + pc.bg + ';">' +
+      '<div style="font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:' + pc.color + ';margin-bottom:6px;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;">' + pc.label + '</div>' +
+      '<div style="font-size:11px;font-weight:700;color:#1a1a1a;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;">' + school + '</div>' +
+    '</div>';
+  }).join('');
+  return '<div style="margin-bottom:28px;">' +
+    '<div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#aaa;margin-bottom:14px;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;border-bottom:1px solid #e8e8e8;padding-bottom:8px;">Most Active by Program This Week</div>' +
+    '<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;">' + cards + '</div>' +
+  '</div>';
+}
+
+function bubbleSVG(schools) {
+  const positions = [
+    { cx: 180, cy: 200 }, { cx: 420, cy: 150 },
+    { cx: 560, cy: 230 }, { cx: 320, cy: 280 }
+  ];
+  const bubbles = schools.map((school, i) => {
     const sc = SCHOOL_CONFIG[school.key] || { accent: '#999', short: school.key };
-    const platforms = new Set((school.items || []).map(item => item.platform));
-    return {
-      key: school.key,
-      name: sc.short,
-      accent: sc.accent,
-      activities: school.items?.length || 0,
-      platforms: platforms.size,
-      radius: Math.max(20, (school.items?.length || 0) * 8),
-    };
-  });
+    const pos = positions[i] || { cx: 200 + i * 120, cy: 200 };
+    const count = school.items?.length || 0;
+    const platforms = new Set((school.items || []).map(item => item.platform)).size;
+    const r = Math.max(24, count * 8);
+    return '<circle cx="' + pos.cx + '" cy="' + pos.cy + '" r="' + r + '" fill="' + sc.accent + '" opacity="0.12"/>' +
+      '<circle cx="' + pos.cx + '" cy="' + pos.cy + '" r="' + (r * 0.55) + '" fill="' + sc.accent + '" opacity="0.35"/>' +
+      '<text x="' + pos.cx + '" y="' + (pos.cy - 4) + '" text-anchor="middle" font-size="11" font-weight="700" fill="' + sc.accent + '" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">' + sc.short + '</text>' +
+      '<text x="' + pos.cx + '" y="' + (pos.cy + 11) + '" text-anchor="middle" font-size="9" fill="' + sc.accent + '" font-family="Helvetica Neue,Helvetica,Arial,sans-serif">' + count + ' activities</text>';
+  }).join('');
+
+  return '<svg viewBox="0 0 760 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">' +
+    '<rect width="760" height="380" fill="#fff"/>' +
+    '<line x1="60" y1="20" x2="60" y2="340" stroke="#f0f0f0" stroke-width="1"/>' +
+    '<line x1="60" y1="340" x2="740" y2="340" stroke="#f0f0f0" stroke-width="1"/>' +
+    '<line x1="60" y1="280" x2="740" y2="280" stroke="#f5f5f5" stroke-width="1" stroke-dasharray="4,4"/>' +
+    '<line x1="60" y1="220" x2="740" y2="220" stroke="#f5f5f5" stroke-width="1" stroke-dasharray="4,4"/>' +
+    '<line x1="60" y1="160" x2="740" y2="160" stroke="#f5f5f5" stroke-width="1" stroke-dasharray="4,4"/>' +
+    '<line x1="60" y1="100" x2="740" y2="100" stroke="#f5f5f5" stroke-width="1" stroke-dasharray="4,4"/>' +
+    '<text x="400" y="370" text-anchor="middle" font-size="10" fill="#aaa" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" letter-spacing="1">ACTIVITY VOLUME</text>' +
+    '<text x="20" y="190" text-anchor="middle" font-size="10" fill="#aaa" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" transform="rotate(-90,20,190)" letter-spacing="1">PLATFORM REACH</text>' +
+    bubbles +
+  '</svg>';
 }
 
 export function generateReportHTML(report) {
   const { key_insights, schools, report_date } = report;
   const totalActivities = schools.reduce((a, s) => a + (s.items?.length || 0), 0);
-  const weekNum = Math.ceil(new Date().getDate() / 7);
-  const chartData = bubbleChartData(schools);
 
-  const insightRows = (key_insights?.highlights || []).map((h, i) => insightCard(h, i)).join('');
+  const insightCardsLeft = (key_insights?.highlights || []).filter((_, i) => i % 2 === 0).map((h, i) => insightCard(h, i * 2)).join('');
+  const insightCardsRight = (key_insights?.highlights || []).filter((_, i) => i % 2 === 1).map((h, i) => insightCard(h, i * 2 + 1)).join('');
 
   const schoolSections = schools.map(school => {
-    const sc = SCHOOL_CONFIG[school.key] || { accent: '#333', light: '#f9f9f9', name: school.name, short: school.key.toUpperCase() };
+    const sc = SCHOOL_CONFIG[school.key] || { accent: '#333', name: school.name, short: school.key.toUpperCase(), logo: '' };
     const items = school.items || [];
-    const left = items.filter((_, i) => i % 2 === 0).map(activityCard).join('');
-    const right = items.filter((_, i) => i % 2 === 1).map(activityCard).join('');
+    const leftCards = items.filter((_, i) => i % 2 === 0).map(activityCard).join('');
+    const rightCards = items.filter((_, i) => i % 2 === 1).map(activityCard).join('');
     const platformCounts = {};
-    items.forEach(i => { platformCounts[i.platform] = (platformCounts[i.platform] || 0) + 1; });
-    const topPlatforms = Object.entries(platformCounts).sort((a,b) => b[1]-a[1]).slice(0, 3);
+    items.forEach(item => { platformCounts[item.platform] = (platformCounts[item.platform] || 0) + 1; });
+    const topPlatforms = Object.entries(platformCounts).sort((a, b) => b[1] - a[1]).slice(0, 3).map(p => p[0].toUpperCase()).join(' · ');
 
-    return `
-    <div style="margin-bottom:56px;">
-      <!-- School header bar -->
-      <div style="background:#fff;border-top:4px solid ${sc.accent};border-bottom:1px solid #e8e8e8;padding:24px 0 20px;margin-bottom:24px;">
-        <div style="display:flex;align-items:flex-end;justify-content:space-between;">
-          <div>
-            <div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#aaa;margin-bottom:6px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">Competitor Analysis</div>
-            ${sc.logo ? `<img src="${sc.logo}" style="height:36px;width:auto;object-fit:contain;margin-bottom:8px;opacity:0.85;" onerror="this.style.display='none'" /><br>` : ''}
-            <div style="font-size:28px;font-weight:700;color:#1a1a1a;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">${school.name}</div>
-          </div>
-          <div style="display:flex;gap:32px;text-align:right;">
-            <div>
-              <div style="font-size:32px;font-weight:700;color:${sc.accent};line-height:1;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">${items.length}</div>
-              <div style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#aaa;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">Activities</div>
-            </div>
-            <div>
-              <div style="font-size:32px;font-weight:700;color:${sc.accent};line-height:1;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">${new Set(items.map(i=>i.platform)).size}</div>
-              <div style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#aaa;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">Platforms</div>
-            </div>
-            ${topPlatforms.length ? `<div>
-              <div style="font-size:13px;font-weight:700;color:${sc.accent};line-height:1.4;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">${topPlatforms.map(p=>p[0].toUpperCase()).join(' · ')}</div>
-              <div style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#aaa;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">Top Channels</div>
-            </div>` : ''}
-          </div>
-        </div>
-      </div>
-
-      <!-- Two column activity cards -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-        <div>${left || '<p style="font-size:12px;color:#ccc;padding:12px 0;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;">No activity found.</p>'}</div>
-        <div>${right}</div>
-      </div>
-    </div>`;
+    return '<div style="margin-bottom:56px;">' +
+      '<div style="background:#fff;border-top:4px solid ' + sc.accent + ';border-bottom:1px solid #e8e8e8;padding:24px 0 20px;margin-bottom:24px;">' +
+        '<div style="display:flex;align-items:center;justify-content:space-between;">' +
+          '<div style="display:flex;align-items:center;gap:16px;">' +
+            (sc.logo ? '<img src="' + sc.logo + '" style="height:40px;width:auto;object-fit:contain;opacity:0.85;" onerror="this.style.display=\'none\'" />' : '') +
+            '<div>' +
+              '<div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#aaa;margin-bottom:4px;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;">Competitor Analysis</div>' +
+              '<div style="font-size:26px;font-weight:700;color:#1a1a1a;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;">' + school.name + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div style="display:flex;gap:28px;text-align:right;">' +
+            '<div><div style="font-size:32px;font-weight:700;color:' + sc.accent + ';line-height:1;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;">' + items.length + '</div><div style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#aaa;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;">Activities</div></div>' +
+            '<div><div style="font-size:32px;font-weight:700;color:' + sc.accent + ';line-height:1;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;">' + new Set(items.map(i => i.platform)).size + '</div><div style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#aaa;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;">Platforms</div></div>' +
+            (topPlatforms ? '<div><div style="font-size:12px;font-weight:700;color:' + sc.accent + ';line-height:1.5;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;">' + topPlatforms + '</div><div style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#aaa;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;">Top Channels</div></div>' : '') +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">' +
+        '<div>' + (leftCards || '<p style="font-size:12px;color:#ccc;padding:12px 0;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;">No activity found.</p>') + '</div>' +
+        '<div>' + rightCards + '</div>' +
+      '</div>' +
+    '</div>';
   }).join('');
 
-  // Build bubble chart positions
-  const bubblePositions = chartData.map((d, i) => {
-    const positions = [
-      { cx: 180, cy: 200 }, { cx: 420, cy: 150 },
-      { cx: 580, cy: 220 }, { cx: 300, cy: 280 }
-    ];
-    const pos = positions[i] || { cx: 200 + i*120, cy: 200 };
-    return { ...d, ...pos };
-  });
+  return '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1.0">\n<title>IMM Intelligence Report · ' + report_date + '</title>\n' +
+  '<style>* { box-sizing: border-box; margin: 0; padding: 0; } body { background: #fff; font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; color: #1a1a1a; } .page { max-width: 960px; margin: 0 auto; } .section { padding: 56px 64px; } @media (max-width: 768px) { .section { padding: 32px 24px; } .two-col { grid-template-columns: 1fr !important; } .stat-row { flex-wrap: wrap; } .prog-grid { grid-template-columns: 1fr 1fr !important; } }</style>\n' +
+  '</head>\n<body>\n<div class="page">\n\n' +
 
-  const bubbleSVG = `
-  <svg viewBox="0 0 760 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
-    <rect width="760" height="380" fill="#fff"/>
-    <!-- Grid lines -->
-    <line x1="60" y1="20" x2="60" y2="340" stroke="#f0f0f0" stroke-width="1"/>
-    <line x1="60" y1="340" x2="740" y2="340" stroke="#f0f0f0" stroke-width="1"/>
-    ${[1,2,3,4,5].map(i => `<line x1="60" y1="${340 - i*60}" x2="740" y2="${340 - i*60}" stroke="#f5f5f5" stroke-width="1" stroke-dasharray="4,4"/>`).join('')}
-    ${[1,2,3,4,5,6].map(i => `<line x1="${60 + i*110}" y1="20" x2="${60 + i*110}" y2="340" stroke="#f5f5f5" stroke-width="1" stroke-dasharray="4,4"/>`).join('')}
-    <!-- Axis labels -->
-    <text x="400" y="370" text-anchor="middle" font-size="10" fill="#aaa" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" letter-spacing="1">ACTIVITY VOLUME</text>
-    <text x="20" y="190" text-anchor="middle" font-size="10" fill="#aaa" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" transform="rotate(-90,20,190)" letter-spacing="1">PLATFORM REACH</text>
-    <!-- Bubbles -->
-    ${bubblePositions.map(d => `
-      <circle cx="${d.cx}" cy="${d.cy}" r="${d.radius}" fill="${d.accent}" opacity="0.15"/>
-      <circle cx="${d.cx}" cy="${d.cy}" r="${d.radius * 0.6}" fill="${d.accent}" opacity="0.4"/>
-      <text x="${d.cx}" y="${d.cy - 4}" text-anchor="middle" font-size="11" font-weight="700" fill="${d.accent}" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">${d.name}</text>
-      <text x="${d.cx}" y="${d.cy + 10}" text-anchor="middle" font-size="9" fill="${d.accent}" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">${d.activities} activities</text>
-    `).join('')}
-  </svg>`;
+  '<!-- COVER -->\n' +
+  '<div style="position:relative;overflow:hidden;">' +
+    '<div style="display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(2,180px);gap:2px;">' + coverPhotoGrid() + '</div>' +
+    '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">' +
+      '<div style="background:#fff;border:1px solid #e8e8e8;padding:40px 52px;text-align:center;max-width:420px;width:90%;">' +
+        '<div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#aaa;margin-bottom:16px;">IMM INTELLIGENCE REPORT</div>' +
+        '<div style="font-size:44px;font-weight:700;color:#1a1a1a;line-height:1.05;letter-spacing:-1px;margin-bottom:8px;">Competitor<br>Briefing</div>' +
+        '<div style="width:40px;height:2px;background:#1a1a1a;margin:16px auto;"></div>' +
+        '<div style="font-size:12px;color:#aaa;letter-spacing:1px;margin-bottom:4px;">' + report_date + '</div>' +
+        '<div style="font-size:11px;color:#ccc;">Istituto Marangoni Miami · Intelligence Unit</div>' +
+      '</div>' +
+    '</div>' +
+  '</div>' +
 
-  return `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IMM Intelligence Report · ${report_date}</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { 
-      background: #fff; 
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      color: #1a1a1a;
-      -webkit-print-color-adjust: exact;
-    }
-    .page { max-width: 960px; margin: 0 auto; background: #fff; }
-    .section { padding: 56px 64px; }
-    .section-divider { border: none; border-top: 1px solid #e8e8e8; margin: 0 64px; }
-    .section-label { font-size: 9px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #aaa; margin-bottom: 24px; }
-    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    @media (max-width: 768px) {
-      .section { padding: 32px 24px; }
-      .two-col { grid-template-columns: 1fr; }
-      .cover-title { font-size: 36px !important; }
-      .stat-row { flex-wrap: wrap; }
-    }
-  </style>
-</head>
-<body>
-<div class="page">
+  '<div style="background:#1a1a1a;padding:12px 64px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;">' +
+    '<span style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#C0392B;border:1px solid rgba(192,57,43,0.5);padding:4px 12px;">MDC</span>' +
+    '<span style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#4A90D9;border:1px solid rgba(74,144,217,0.4);padding:4px 12px;">FIT</span>' +
+    '<span style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#27AE60;border:1px solid rgba(39,174,96,0.4);padding:4px 12px;">SCAD</span>' +
+    '<span style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#aaa;border:1px solid rgba(170,170,170,0.3);padding:4px 12px;">PARSONS</span>' +
+    '<span style="margin-left:auto;font-size:9px;color:#555;letter-spacing:1px;text-transform:uppercase;">IG · LinkedIn · TikTok · Press · Blog · Newsletter · Web</span>' +
+  '</div>' +
 
-  <!-- ═══════════════════════════════
-       COVER PAGE
-  ═══════════════════════════════ -->
-  <div style="position:relative;overflow:hidden;">
-    <!-- Photo grid background -->
-    <div style="display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(3,160px);gap:2px;">
-      ${coverPhotoGrid(schools)}
-    </div>
-    <!-- White centered title box -->
-    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
-      <div style="background:#fff;border:1px solid #e8e8e8;padding:40px 52px;text-align:center;max-width:420px;width:90%;">
-        <div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#aaa;margin-bottom:16px;">IMM INTELLIGENCE REPORT</div>
-        <div class="cover-title" style="font-size:44px;font-weight:700;color:#1a1a1a;line-height:1.05;letter-spacing:-1px;margin-bottom:8px;">Competitor<br>Briefing</div>
-        <div style="width:40px;height:2px;background:#1a1a1a;margin:16px auto;"></div>
-        <div style="font-size:12px;color:#aaa;letter-spacing:1px;margin-bottom:4px;">${report_date}</div>
-        <div style="font-size:11px;color:#ccc;">Istituto Marangoni Miami · Intelligence Unit</div>
-      </div>
-    </div>
-  </div>
+  '<!-- EXECUTIVE SUMMARY -->\n' +
+  '<div class="section">' +
+    '<div style="text-align:center;margin-bottom:40px;">' +
+      '<div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#aaa;margin-bottom:12px;">Executive Summary</div>' +
+      '<div style="font-size:36px;font-weight:700;color:#1a1a1a;letter-spacing:-0.5px;">This Week in Numbers</div>' +
+      '<div style="width:40px;height:2px;background:#1a1a1a;margin:16px auto 0;"></div>' +
+    '</div>' +
 
-  <!-- School pills bar -->
-  <div style="background:#1a1a1a;padding:12px 64px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
-    <span style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#C0392B;border:1px solid rgba(192,57,43,0.5);padding:4px 12px;">MDC</span>
-    <span style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#4A90D9;border:1px solid rgba(74,144,217,0.4);padding:4px 12px;">FIT</span>
-    <span style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#27AE60;border:1px solid rgba(39,174,96,0.4);padding:4px 12px;">SCAD</span>
-    <span style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#aaa;border:1px solid rgba(170,170,170,0.3);padding:4px 12px;">PARSONS</span>
-    <span style="margin-left:auto;font-size:9px;color:#555;letter-spacing:1px;text-transform:uppercase;">IG · LinkedIn · TikTok · Press · Blog · Newsletter · Web</span>
-  </div>
+    '<div class="stat-row" style="display:flex;gap:0;border:1px solid #e8e8e8;margin-bottom:32px;">' +
+      '<div style="flex:1;padding:28px 24px;border-right:1px solid #e8e8e8;text-align:center;"><div style="font-size:48px;font-weight:700;color:#1a1a1a;line-height:1;">' + totalActivities + '</div><div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#aaa;margin-top:6px;">Total Activities</div></div>' +
+      '<div style="flex:1;padding:28px 24px;border-right:1px solid #e8e8e8;text-align:center;"><div style="font-size:48px;font-weight:700;color:#1a1a1a;line-height:1;">4</div><div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#aaa;margin-top:6px;">Schools Tracked</div></div>' +
+      '<div style="flex:1;padding:28px 24px;border-right:1px solid #e8e8e8;text-align:center;"><div style="font-size:48px;font-weight:700;color:#1a1a1a;line-height:1;">7</div><div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#aaa;margin-top:6px;">Platforms Scanned</div></div>' +
+      '<div style="flex:1;padding:28px 24px;text-align:center;"><div style="font-size:48px;font-weight:700;color:#C0392B;line-height:1;">' + (key_insights?.highlights?.length || 0) + '</div><div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#aaa;margin-top:6px;">Alerts This Week</div></div>' +
+    '</div>' +
 
-  <!-- ═══════════════════════════════
-       EXECUTIVE SUMMARY
-  ═══════════════════════════════ -->
-  <div class="section">
-    <div style="text-align:center;margin-bottom:40px;">
-      <div class="section-label" style="text-align:center;">Executive Summary</div>
-      <div style="font-size:36px;font-weight:700;color:#1a1a1a;letter-spacing:-0.5px;">This Week in Numbers</div>
-      <div style="width:40px;height:2px;background:#1a1a1a;margin:16px auto 0;"></div>
-    </div>
+    '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:40px;">' +
+    schools.map(school => {
+      const sc = SCHOOL_CONFIG[school.key] || { accent: '#333', short: school.key.toUpperCase() };
+      return '<div style="border-top:3px solid ' + sc.accent + ';padding:16px;background:#fafafa;"><div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:' + sc.accent + ';margin-bottom:8px;">' + sc.short + '</div><div style="font-size:28px;font-weight:700;color:#1a1a1a;line-height:1;">' + (school.items?.length || 0) + '</div><div style="font-size:10px;color:#aaa;margin-top:4px;">activities</div></div>';
+    }).join('') +
+    '</div>' +
 
-    <!-- Big stats row -->
-    <div class="stat-row" style="display:flex;gap:0;border:1px solid #e8e8e8;margin-bottom:32px;">
-      <div style="flex:1;padding:28px 24px;border-right:1px solid #e8e8e8;text-align:center;">
-        <div style="font-size:48px;font-weight:700;color:#1a1a1a;line-height:1;">${totalActivities}</div>
-        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#aaa;margin-top:6px;">Total Activities</div>
-      </div>
-      <div style="flex:1;padding:28px 24px;border-right:1px solid #e8e8e8;text-align:center;">
-        <div style="font-size:48px;font-weight:700;color:#1a1a1a;line-height:1;">4</div>
-        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#aaa;margin-top:6px;">Schools Tracked</div>
-      </div>
-      <div style="flex:1;padding:28px 24px;border-right:1px solid #e8e8e8;text-align:center;">
-        <div style="font-size:48px;font-weight:700;color:#1a1a1a;line-height:1;">7</div>
-        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#aaa;margin-top:6px;">Platforms Scanned</div>
-      </div>
-      <div style="flex:1;padding:28px 24px;text-align:center;">
-        <div style="font-size:48px;font-weight:700;color:#C0392B;line-height:1;">${key_insights?.highlights?.length || 0}</div>
-        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#aaa;margin-top:6px;">Alerts This Week</div>
-      </div>
-    </div>
+    '<div style="border:1px solid #e8e8e8;padding:24px;">' +
+      '<div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#aaa;margin-bottom:16px;">Activity Volume vs Platform Reach</div>' +
+      bubbleSVG(schools) +
+    '</div>' +
+  '</div>' +
 
-    <!-- Per school stats -->
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:40px;">
-      ${schools.map(school => {
-        const sc = SCHOOL_CONFIG[school.key] || { accent: '#333', short: school.key.toUpperCase() };
-        return `
-        <div style="border-top:3px solid ${sc.accent};padding:16px;background:#fafafa;">
-          <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:${sc.accent};margin-bottom:8px;">${sc.short}</div>
-          <div style="font-size:28px;font-weight:700;color:#1a1a1a;line-height:1;">${school.items?.length || 0}</div>
-          <div style="font-size:10px;color:#aaa;margin-top:4px;">activities</div>
-        </div>`;
-      }).join('')}
-    </div>
+  '<hr style="border:none;border-top:1px solid #e8e8e8;margin:0 64px;">' +
 
-    <!-- Bubble chart -->
-    <div style="border:1px solid #e8e8e8;padding:24px;">
-      <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#aaa;margin-bottom:16px;">Activity Volume vs Platform Reach — All Schools</div>
-      ${bubbleSVG}
-    </div>
-  </div>
+  '<!-- KEY INSIGHTS -->\n' +
+  '<div class="section">' +
+    '<div style="text-align:center;margin-bottom:40px;">' +
+      '<div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#aaa;margin-bottom:12px;">Key Insights</div>' +
+      '<div style="font-size:36px;font-weight:700;color:#1a1a1a;letter-spacing:-0.5px;">What the Data Tells Us</div>' +
+      '<div style="width:40px;height:2px;background:#1a1a1a;margin:16px auto 0;"></div>' +
+    '</div>' +
 
-  <hr class="section-divider">
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">' +
+      '<div style="background:#1a1a1a;padding:28px 32px;">' +
+        '<div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#666;margin-bottom:8px;">Most Active This Week</div>' +
+        '<div style="font-size:28px;font-weight:700;color:#fff;line-height:1.1;">' + (key_insights?.most_active_school || '—') + '</div>' +
+        '<div style="font-size:13px;color:#555;margin-top:8px;">' + (key_insights?.most_active_count || 0) + ' activities detected</div>' +
+      '</div>' +
+      '<div style="border:2px solid #1a1a1a;padding:28px 32px;">' +
+        '<div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#aaa;margin-bottom:8px;">Recommended Action for IMM</div>' +
+        '<div style="font-size:14px;font-weight:700;color:#1a1a1a;line-height:1.6;">' + (key_insights?.recommended_action || '—') + '</div>' +
+      '</div>' +
+    '</div>' +
 
-  <!-- ═══════════════════════════════
-       KEY INSIGHTS
-  ═══════════════════════════════ -->
-  <div class="section">
-    <div style="text-align:center;margin-bottom:40px;">
-      <div class="section-label" style="text-align:center;">Key Insights</div>
-      <div style="font-size:36px;font-weight:700;color:#1a1a1a;letter-spacing:-0.5px;">What the Data Tells Us</div>
-      <div style="width:40px;height:2px;background:#1a1a1a;margin:16px auto 0;"></div>
-    </div>
+    programActivityGrid(key_insights?.program_activity) +
 
-    <!-- Most active + recommended action -->
-    <div class="two-col" style="margin-bottom:24px;">
-      <div style="background:#1a1a1a;padding:28px 32px;">
-        <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#666;margin-bottom:8px;">Most Active This Week</div>
-        <div style="font-size:28px;font-weight:700;color:#fff;line-height:1.1;">${key_insights?.most_active_school || '—'}</div>
-        <div style="font-size:13px;color:#555;margin-top:8px;">${key_insights?.most_active_count || 0} activities detected</div>
-      </div>
-      <div style="border:2px solid #1a1a1a;padding:28px 32px;">
-        <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#aaa;margin-bottom:8px;">Recommended Action for IMM</div>
-        <div style="font-size:14px;font-weight:700;color:#1a1a1a;line-height:1.6;">${key_insights?.recommended_action || '—'}</div>
-      </div>
-    </div>
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">' +
+      '<div>' + insightCardsLeft + '</div>' +
+      '<div>' + insightCardsRight + '</div>' +
+    '</div>' +
+  '</div>' +
 
-    <!-- Program activity summary -->
-    ${key_insights?.program_activity ? `
-    <div style="margin-bottom:28px;">
-      <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#aaa;margin-bottom:14px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;border-bottom:1px solid #e8e8e8;padding-bottom:8px;">Program Activity This Week</div>
-      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;">
-        ${Object.entries(key_insights.program_activity).map(([prog, school]) => {
-          const pc = PROGRAM_CONFIG[prog] || PROGRAM_CONFIG.general;
-          return \`<div style="border-top:2px solid \${pc.color};padding:12px 10px;background:\${pc.bg};">
-            <div style="font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:\${pc.color};margin-bottom:6px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">\${pc.label}</div>
-            <div style="font-size:11px;font-weight:700;color:#1a1a1a;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">\${school || '—'}</div>
-          </div>\`;
-        }).join('')}
-      </div>
-    </div>` : ''}
+  '<hr style="border:none;border-top:1px solid #e8e8e8;margin:0 64px;">' +
 
-    <!-- Insight cards two-column -->
-    <div class="two-col">
-      <div>${(key_insights?.highlights || []).filter((_,i)=>i%2===0).map((h,i)=>insightCard(h,i*2)).join('')}</div>
-      <div>${(key_insights?.highlights || []).filter((_,i)=>i%2===1).map((h,i)=>insightCard(h,i*2+1)).join('')}</div>
-    </div>
-  </div>
+  '<!-- ACTIVITY LOG -->\n' +
+  '<div class="section">' +
+    '<div style="text-align:center;margin-bottom:40px;">' +
+      '<div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#aaa;margin-bottom:12px;">Full Activity Log</div>' +
+      '<div style="font-size:36px;font-weight:700;color:#1a1a1a;letter-spacing:-0.5px;">All Platforms · All Schools</div>' +
+      '<div style="width:40px;height:2px;background:#1a1a1a;margin:16px auto 0;"></div>' +
+    '</div>' +
+    schoolSections +
+  '</div>' +
 
-  <hr class="section-divider">
+  '<div style="background:#1a1a1a;padding:28px 64px;">' +
+    '<div style="display:flex;justify-content:space-between;align-items:center;">' +
+      '<div><div style="font-size:13px;font-weight:700;color:#fff;letter-spacing:0.5px;">Istituto Marangoni Miami</div><div style="font-size:10px;color:#555;margin-top:3px;letter-spacing:0.5px;">The Miami School of Fashion & Design · Intelligence Unit</div></div>' +
+      '<div style="text-align:right;"><div style="font-size:9px;color:#444;letter-spacing:1px;text-transform:uppercase;">' + report_date + '</div><div style="font-size:9px;color:#444;margin-top:3px;">Auto-generated · Confidential</div></div>' +
+    '</div>' +
+  '</div>' +
 
-  <!-- ═══════════════════════════════
-       FULL ACTIVITY LOG
-  ═══════════════════════════════ -->
-  <div class="section">
-    <div style="text-align:center;margin-bottom:40px;">
-      <div class="section-label" style="text-align:center;">Full Activity Log</div>
-      <div style="font-size:36px;font-weight:700;color:#1a1a1a;letter-spacing:-0.5px;">All Platforms · All Schools</div>
-      <div style="width:40px;height:2px;background:#1a1a1a;margin:16px auto 0;"></div>
-    </div>
-    ${schoolSections}
-  </div>
-
-  <!-- ═══════════════════════════════
-       FOOTER
-  ═══════════════════════════════ -->
-  <div style="background:#1a1a1a;padding:28px 64px;">
-    <div style="display:flex;justify-content:space-between;align-items:center;">
-      <div>
-        <div style="font-size:13px;font-weight:700;color:#fff;letter-spacing:0.5px;">Istituto Marangoni Miami</div>
-        <div style="font-size:10px;color:#555;margin-top:3px;letter-spacing:0.5px;">The Miami School of Fashion & Design · Intelligence Unit</div>
-      </div>
-      <div style="text-align:right;">
-        <div style="font-size:9px;color:#444;letter-spacing:1px;text-transform:uppercase;">${report_date}</div>
-        <div style="font-size:9px;color:#444;margin-top:3px;letter-spacing:0.5px;">Auto-generated · Confidential · Not for external distribution</div>
-      </div>
-    </div>
-  </div>
-
-</div>
-</body>
-</html>`;
+  '\n</div>\n</body>\n</html>';
 }

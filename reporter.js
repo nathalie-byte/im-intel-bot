@@ -74,7 +74,7 @@ Platform values: instagram, linkedin, tiktok, press, blog, newsletter, website
 Find 4-6 real verifiable items per school. Use actual web search results.`;
 
   const response = await client.messages.create({
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-sonnet-4-5',
     max_tokens: 6000,
     tools: [{ type: 'web_search_20250305', name: 'web_search' }],
     messages: [{ role: 'user', content: prompt }]

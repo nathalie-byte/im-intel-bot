@@ -14,6 +14,14 @@ const PLATFORM_CONFIG = {
   newsletter: { label: 'Newsletter', color: '#4A4A4A' },
   website:    { label: 'Website',    color: '#222222' },
 };
+const PROGRAM_CONFIG = {
+  fashion_design:    { label: 'Fashion Design',        color: '#8B1A1A', bg: '#FDF0F0' },
+  fashion_business:  { label: 'Fashion Business',      color: '#1A3A6B', bg: '#EEF3FB' },
+  fashion_styling:   { label: 'Fashion Styling',       color: '#6B3A1A', bg: '#FDF5EE' },
+  interior_design:   { label: 'Interior Design',       color: '#1A4A2E', bg: '#EEF8F2' },
+  beauty_fragrances: { label: 'Beauty & Fragrances',   color: '#6B1A5A', bg: '#FAF0F8' },
+  general:           { label: 'General',               color: '#555555', bg: '#F5F5F5' },
+};
 
 const URGENCY_CONFIG = {
   high:   { label: 'HIGH PRIORITY', color: '#C0392B', bg: '#FDF3F2', border: '#C0392B' },
@@ -55,10 +63,14 @@ function coverPhotoGrid(schools) {
 
 function activityCard(item) {
   const p = PLATFORM_CONFIG[item.platform] || { color: '#555', label: item.platform };
+  const prog = PROGRAM_CONFIG[item.program] || PROGRAM_CONFIG.general;
   return `
   <div style="border:1px solid #e8e8e8;border-left:3px solid ${p.color};padding:18px;margin-bottom:12px;background:#fff;">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-      <span style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${p.color};font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">${p.label}</span>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <div style="display:flex;gap:6px;flex-wrap:wrap;">
+        <span style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${p.color};font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">${p.label}</span>
+        <span style="font-size:8px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;background:${prog.bg};color:${prog.color};padding:2px 7px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">${prog.label}</span>
+      </div>
       <span style="font-size:10px;color:#aaa;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">${item.time || 'Recent'}</span>
     </div>
     <div style="font-size:13px;font-weight:700;color:#1a1a1a;line-height:1.4;margin-bottom:6px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">${item.title || ''}</div>
@@ -314,6 +326,21 @@ export function generateReportHTML(report) {
         <div style="font-size:14px;font-weight:700;color:#1a1a1a;line-height:1.6;">${key_insights?.recommended_action || '—'}</div>
       </div>
     </div>
+
+    <!-- Program activity summary -->
+    ${key_insights?.program_activity ? `
+    <div style="margin-bottom:28px;">
+      <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#aaa;margin-bottom:14px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;border-bottom:1px solid #e8e8e8;padding-bottom:8px;">Program Activity This Week</div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;">
+        ${Object.entries(key_insights.program_activity).map(([prog, school]) => {
+          const pc = PROGRAM_CONFIG[prog] || PROGRAM_CONFIG.general;
+          return \`<div style="border-top:2px solid \${pc.color};padding:12px 10px;background:\${pc.bg};">
+            <div style="font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:\${pc.color};margin-bottom:6px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">\${pc.label}</div>
+            <div style="font-size:11px;font-weight:700;color:#1a1a1a;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">\${school || '—'}</div>
+          </div>\`;
+        }).join('')}
+      </div>
+    </div>` : ''}
 
     <!-- Insight cards two-column -->
     <div class="two-col">

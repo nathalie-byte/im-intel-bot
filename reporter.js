@@ -74,7 +74,7 @@ Platform values: instagram, linkedin, tiktok, press, blog, newsletter, website
 Find 4-6 real verifiable items per school. Use actual web search results.`;
 
   const response = await client.messages.create({
-    model: 'claude-haiku-4-5-20251001',
+    model: 'claude-3-5-haiku-20241022',
     max_tokens: 6000,
     tools: [{ type: 'web_search_20250305', name: 'web_search' }],
     messages: [{ role: 'user', content: prompt }]

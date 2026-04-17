@@ -37,6 +37,7 @@ function buildEmailHTML(report, reportUrl) {
   <tr><td style="background:#111;padding:36px 40px 28px;">
     <div style="font-family:Georgia,serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:12px;">Istituto Marangoni Miami · Intelligence Unit</div>
     <div style="font-family:Georgia,serif;font-size:26px;color:#fff;font-weight:400;line-height:1.1;">Competitor Intelligence<br><em style="color:rgba(255,255,255,0.35);">Daily Briefing</em></div>
+    <div style="margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.1);margin-bottom:16px;"><div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;font-weight:700;color:#ffffff;">Report created and published by Nathalie Tessier</div></div>
     <div style="margin-top:24px;display:flex;gap:32px;">
       <div>
         <div style="font-family:Georgia,serif;font-size:28px;color:#fff;font-weight:700;">${totalActivities}</div>

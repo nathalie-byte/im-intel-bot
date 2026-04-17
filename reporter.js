@@ -7,113 +7,24 @@ export async function generateReport() {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
   });
 
-  const weekAgo = new Date();
-  weekAgo.setDate(weekAgo.getDate() - 7);
-  const weekAgoStr = weekAgo.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-
   console.log('[reporter] Generating report for', today);
 
-  const prompt = `Today is ${today}. You are a competitive intelligence analyst for Istituto Marangoni Miami (IMM).
+  const prompt = `Today is ${today}. Search the web for fashion school activity from the last 7 days in 2026 only.
 
-IMPORTANT: Only include content published between ${weekAgoStr} and ${today} (2026 only). Ignore anything older.
+Track these 5 schools:
+1. Istituto Marangoni Miami IMM @istitutomarangoni_miami
+2. Miami Fashion Institute MDC
+3. FIT New York Fashion Institute of Technology
+4. SCAD Savannah College of Art and Design
+5. Parsons School of Design
 
-Search the web for recent 2026 activity from ALL FIVE schools:
-1. Istituto Marangoni Miami (IMM) - @istitutomarangoni_miami on Instagram, istitutomarangonimiami.com
-2. Miami Fashion Institute MDC - @miamifashioninstitute
-3. FIT New York - Fashion Institute of Technology
-4. SCAD - Savannah College of Art and Design
-5. Parsons School of Design New York
+Search Instagram, LinkedIn, TikTok, press, blogs, newsletters, websites.
 
-For Instagram specifically, try to count and distinguish between:
-- Regular posts (photos/carousels)
-- Reels (video content)
-- Stories (if visible)
+Return a single valid JSON object with this exact structure. Replace all placeholder values with real data:
 
-For each school also search: LinkedIn, TikTok, press coverage, blogs, newsletters, website updates from 2026 only.
+{"report_date":"${today}","generated_at":"${new Date().toISOString()}","instagram_breakdown":{"imm":{"posts":0,"reels":0,"stories":0,"total":0},"mdc":{"posts":0,"reels":0,"stories":0,"total":0},"fit":{"posts":0,"reels":0,"stories":0,"total":0},"scad":{"posts":0,"reels":0,"stories":0,"total":0},"parsons":{"posts":0,"reels":0,"stories":0,"total":0}},"birds_eye_view":{"summary":"Overview of what all schools are doing this week","programming_overview":[{"school":"IMM","focus":"main focus this week","activity_count":3},{"school":"MDC","focus":"main focus","activity_count":3},{"school":"FIT","focus":"main focus","activity_count":3},{"school":"SCAD","focus":"main focus","activity_count":3},{"school":"Parsons","focus":"main focus","activity_count":3}]},"differentials":[{"metric":"Instagram activity this week","imm_value":"X posts","competitor":"SCAD","competitor_value":"X posts","gap":"behind","note":"observation"}],"opportunities":[{"opportunity":"Specific action IMM could take","based_on":"What competitor does well","competitor":"FIT","priority":"high"}],"key_insights":{"most_active_school":"school name","most_active_count":5,"highlights":[{"type":"event","school":"school name","headline":"headline","detail":"why this matters for IMM","urgency":"medium"}],"recommended_action":"One action for IMM this week"},"schools":[{"key":"imm","name":"Istituto Marangoni Miami (IMM)","total_activities":3,"items":[{"platform":"instagram","title":"title","snippet":"description","url":"https://example.com","time":"2 days ago","engagement":"N/A"}]},{"key":"mdc","name":"Miami Fashion Institute (MDC)","total_activities":3,"items":[]},{"key":"fit","name":"FIT New York","total_activities":3,"items":[]},{"key":"scad","name":"SCAD","total_activities":3,"items":[]},{"key":"parsons","name":"Parsons School of Design","total_activities":3,"items":[]}]}
 
-YOU MUST RESPOND WITH ONLY A JSON OBJECT. NO TEXT BEFORE OR AFTER. NO MARKDOWN. JUST RAW JSON.
-
-{
-  "report_date": "${today}",
-  "generated_at": "${new Date().toISOString()}",
-  "instagram_breakdown": {
-    "imm":     { "posts": 0, "reels": 0, "stories": 0, "total": 0 },
-    "mdc":     { "posts": 0, "reels": 0, "stories": 0, "total": 0 },
-    "fit":     { "posts": 0, "reels": 0, "stories": 0, "total": 0 },
-    "scad":    { "posts": 0, "reels": 0, "stories": 0, "total": 0 },
-    "parsons": { "posts": 0, "reels": 0, "stories": 0, "total": 0 }
-  },
-  "birds_eye_view": {
-    "summary": "2-3 sentence overview of what all schools are focusing on this week in 2026",
-    "programming_overview": [
-      { "school": "IMM",     "focus": "main theme this week", "activity_count": 3 },
-      { "school": "MDC",     "focus": "main theme this week", "activity_count": 3 },
-      { "school": "FIT",     "focus": "main theme this week", "activity_count": 3 },
-      { "school": "SCAD",    "focus": "main theme this week", "activity_count": 3 },
-      { "school": "Parsons", "focus": "main theme this week", "activity_count": 3 }
-    ]
-  },
-  "differentials": [
-    {
-      "metric": "Instagram Reels this week",
-      "imm_value": "X reels",
-      "competitor": "SCAD",
-      "competitor_value": "X reels",
-      "gap": "behind",
-      "note": "short observation"
-    }
-  ],
-  "opportunities": [
-    {
-      "opportunity": "Specific action IMM could take this week",
-      "based_on": "What competitor is doing well",
-      "competitor": "FIT",
-      "priority": "high"
-    }
-  ],
-  "key_insights": {
-    "most_active_school": "school name",
-    "most_active_count": 5,
-    "highlights": [
-      {
-        "type": "event",
-        "school": "school name",
-        "headline": "headline",
-        "detail": "2-3 sentences why this matters for IMM",
-        "urgency": "high"
-      }
-    ],
-    "recommended_action": "One specific action IMM should take this week"
-  },
-  "schools": [
-    {
-      "key": "imm",
-      "name": "Istituto Marangoni Miami (IMM)",
-      "total_activities": 3,
-      "items": [
-        {
-          "platform": "instagram",
-          "title": "title",
-          "snippet": "what was posted and its impact — 2026 content only",
-          "url": "https://full-url.com",
-          "time": "X days ago",
-          "engagement": "N/A"
-        }
-      ]
-    },
-    { "key": "mdc",     "name": "Miami Fashion Institute (MDC)",  "total_activities": 3, "items": [] },
-    { "key": "fit",     "name": "FIT New York",                   "total_activities": 3, "items": [] },
-    { "key": "scad",    "name": "SCAD",                           "total_activities": 3, "items": [] },
-    { "key": "parsons", "name": "Parsons School of Design",       "total_activities": 3, "items": [] }
-  ]
-}
-
-Rules:
-- ONLY include 2026 content from the last 7 days
-- URLs must always start with https://
-- Platform values: instagram, linkedin, tiktok, press, blog, newsletter, website
-- Be specific with Instagram post/reel/story counts
-- Return ONLY the JSON`;
+Important: Return ONLY the JSON. No text before or after. All URLs must start with https://. Only include 2026 content.`;
 
   const response = await client.messages.create({
     model: 'claude-haiku-4-5-20251001',
@@ -135,7 +46,6 @@ Rules:
 
   const report = JSON.parse(jsonText);
 
-  // Fix URLs missing https://
   report.schools.forEach(school => {
     (school.items || []).forEach(item => {
       if (item.url && item.url.length > 0) {
@@ -146,6 +56,6 @@ Rules:
     });
   });
 
-  console.log('[reporter] Done: ' + report.schools.reduce((a, s) => a + (s.items ? s.items.length : 0), 0) + ' activities across 5 schools');
+  console.log('[reporter] Done: ' + report.schools.reduce((a, s) => a + (s.items ? s.items.length : 0), 0) + ' activities');
   return report;
 }

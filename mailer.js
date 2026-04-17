@@ -33,6 +33,12 @@ function buildEmailHTML(report, reportUrl) {
 <tr><td align="center">
 <table width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;">
 
+  <!-- CONFIDENTIAL BANNER -->
+  <tr><td style="background:#f5f3ee;border-left:3px solid #1a1a1a;padding:12px 40px;">
+    <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#1a1a1a;margin-bottom:4px;">CONFIDENTIAL — FOR INTERNAL USE ONLY</div>
+    <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:11px;color:#555;line-height:1.6;">This report is intended exclusively for Istituto Marangoni Miami (IMM) leadership and authorized recipients. The information contained herein is proprietary and confidential. It may not be shared, forwarded, reproduced, or distributed to any party outside of IMM without prior authorization.</div>
+  </td></tr>
+
   <!-- HEADER -->
   <tr><td style="background:#111;padding:36px 40px 28px;">
     <div style="font-family:Georgia,serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:12px;">Istituto Marangoni Miami · Intelligence Unit</div>

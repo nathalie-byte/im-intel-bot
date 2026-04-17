@@ -9,72 +9,76 @@ export async function generateReport() {
 
   console.log('[reporter] Generating report for', today);
 
-  const prompt = `You are a fashion industry competitive intelligence analyst for Istituto Marangoni Miami. Today is ${today}.
+  const prompt = `Today is ${today}. You are tracking competitor fashion schools for Istituto Marangoni Miami.
 
-Istituto Marangoni Miami offers these programs: Fashion Design, Fashion Business and Merchandising, Fashion Styling, Interior Design, and Beauty and Fragrances.
+Search the web for recent activity (last 7 days) from these schools:
+1. Miami Fashion Institute MDC
+2. FIT New York
+3. SCAD
+4. Parsons School of Design
 
-Search the web and find the most recent activity from the last 7 days from these competitor schools:
-1. Miami Fashion Institute at Miami Dade College (MDC)
-2. Fashion Institute of Technology FIT New York
-3. Savannah College of Art and Design SCAD
-4. Parsons School of Design New York
+Look across Instagram, LinkedIn, TikTok, press, blogs, newsletters, websites.
 
-For each school search across: Instagram, LinkedIn, TikTok, press coverage, blog posts, newsletters, website updates.
-
-For each activity found, note which program area it relates to: Fashion Design, Fashion Business, Fashion Styling, Interior Design, or Beauty and Fragrances.
-
-Key Insights to include:
-- Which school was most active this week
-- Notable moves like new programs, viral posts, scholarships, collaborations, events
-- Any competitive threats to IMM like schools targeting Miami students or launching similar programs
-- One specific recommended action for IMM this week
-
-Return ONLY valid JSON with no markdown and no code fences:
+YOU MUST RESPOND WITH ONLY A JSON OBJECT. NO TEXT BEFORE OR AFTER. NO MARKDOWN. NO EXPLANATION. JUST THE RAW JSON.
 
 {
   "report_date": "${today}",
-  "generated_at": "2026-04-13T00:00:00Z",
+  "generated_at": "${new Date().toISOString()}",
   "key_insights": {
-    "most_active_school": "school name",
-    "most_active_count": 5,
+    "most_active_school": "school name here",
+    "most_active_count": 4,
     "highlights": [
       {
-        "type": "new_program",
+        "type": "event",
         "school": "school name",
-        "headline": "short headline",
-        "detail": "2-3 sentences on why this matters for IMM",
-        "urgency": "high"
+        "headline": "headline here",
+        "detail": "detail here",
+        "urgency": "medium"
       }
     ],
-    "recommended_action": "One clear specific action IMM should take this week"
+    "recommended_action": "action here"
   },
   "schools": [
     {
       "key": "mdc",
       "name": "Miami Fashion Institute (MDC)",
-      "total_activities": 4,
+      "total_activities": 3,
       "items": [
         {
           "platform": "instagram",
-          "title": "Short descriptive headline",
-          "snippet": "1-2 sentence summary and why it matters for IMM",
+          "title": "title here",
+          "snippet": "snippet here",
           "url": "",
           "time": "2 days ago",
           "engagement": "N/A"
         }
       ]
     },
-    { "key": "fit", "name": "FIT New York", "total_activities": 4, "items": [] },
-    { "key": "scad", "name": "SCAD", "total_activities": 4, "items": [] },
-    { "key": "parsons", "name": "Parsons School of Design", "total_activities": 4, "items": [] }
+    {
+      "key": "fit",
+      "name": "FIT New York",
+      "total_activities": 3,
+      "items": []
+    },
+    {
+      "key": "scad",
+      "name": "SCAD",
+      "total_activities": 3,
+      "items": []
+    },
+    {
+      "key": "parsons",
+      "name": "Parsons School of Design",
+      "total_activities": 3,
+      "items": []
+    }
   ]
 }
 
-Platform values: instagram, linkedin, tiktok, press, blog, newsletter, website
-Find 4-6 real verifiable items per school. Use actual web search results.`;
+Fill in real data from your web searches. Platform values: instagram, linkedin, tiktok, press, blog, newsletter, website. Return ONLY the JSON.`;
 
   const response = await client.messages.create({
-   model: 'claude-haiku-4-5-20251001',
+    model: 'claude-haiku-4-5-20251001',
     max_tokens: 6000,
     tools: [{ type: 'web_search_20250305', name: 'web_search' }],
     messages: [{ role: 'user', content: prompt }]
@@ -92,6 +96,18 @@ Find 4-6 real verifiable items per school. Use actual web search results.`;
   jsonText = jsonText.slice(start, end + 1);
 
   const report = JSON.parse(jsonText);
+
+  // Fix URLs missing https://
+  report.schools.forEach(school => {
+    (school.items || []).forEach(item => {
+      if (item.url && item.url.length > 0) {
+        if (!item.url.startsWith('http://') && !item.url.startsWith('https://')) {
+          item.url = 'https://' + item.url;
+        }
+      }
+    });
+  });
+
   console.log('[reporter] Done: ' + report.schools.reduce((a, s) => a + (s.items ? s.items.length : 0), 0) + ' activities found');
   return report;
 }

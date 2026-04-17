@@ -187,6 +187,9 @@ export function generateReportHTML(report) {
         '<div style="width:40px;height:2px;background:#1a1a1a;margin:16px auto;"></div>' +
         '<div style="font-size:12px;color:#aaa;letter-spacing:1px;margin-bottom:4px;">' + report_date + '</div>' +
         '<div style="font-size:11px;color:#ccc;">Istituto Marangoni Miami · Intelligence Unit</div>' +
+        '<div style="margin-top:16px;padding-top:16px;border-top:1px solid #e8e8e8;">' +
+          '<div style="font-size:12px;font-weight:700;color:#1a1a1a;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;">Report created and published by Nathalie Tessier</div>' +
+        '</div>' +
       '</div>' +
     '</div>' +
   '</div>' +
@@ -274,6 +277,10 @@ export function generateReportHTML(report) {
       '<div><div style="font-size:13px;font-weight:700;color:#fff;letter-spacing:0.5px;">Istituto Marangoni Miami</div><div style="font-size:10px;color:#555;margin-top:3px;letter-spacing:0.5px;">The Miami School of Fashion & Design · Intelligence Unit</div></div>' +
       '<div style="text-align:right;"><div style="font-size:9px;color:#444;letter-spacing:1px;text-transform:uppercase;">' + report_date + '</div><div style="font-size:9px;color:#444;margin-top:3px;">Auto-generated · Confidential</div></div>' +
     '</div>' +
+  '</div>' +
+
+  '<div style="background:#f5f5f3;padding:16px 64px;border-top:1px solid #e8e8e8;">' +
+    '<div style="font-size:12px;font-weight:700;color:#1a1a1a;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;">Report created and published by Nathalie Tessier</div>' +
   '</div>' +
 
   '\n</div>\n</body>\n</html>';

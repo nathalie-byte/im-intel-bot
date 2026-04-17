@@ -203,40 +203,6 @@ export function generateReportHTML(report) {
     '<span style="margin-left:auto;font-size:9px;color:#555;letter-spacing:1px;text-transform:uppercase;">IG · LinkedIn · TikTok · Press · Blog · Newsletter · Web</span>' +
   '</div>' +
 
-  '<!-- INSTAGRAM BREAKDOWN -->\n' +
-  '<div class="section" style="background:#fff;">' +
-    '<div style="text-align:center;margin-bottom:32px;">' +
-      '<div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#aaa;margin-bottom:12px;">This Week on Instagram</div>' +
-      '<div style="font-size:32px;font-weight:700;color:#1a1a1a;letter-spacing:-0.5px;">Posts · Reels · Stories</div>' +
-      '<div style="width:40px;height:2px;background:#1a1a1a;margin:16px auto 0;"></div>' +
-    '</div>' +
-    (report.instagram_breakdown ? (
-      '<table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">' +
-        '<tr style="border-bottom:2px solid #1a1a1a;">' +
-          '<th style="text-align:left;padding:10px 16px;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#aaa;font-family:\'Helvetica Neue\',sans-serif;">School</th>' +
-          '<th style="text-align:center;padding:10px 16px;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#C13584;font-family:\'Helvetica Neue\',sans-serif;">Posts</th>' +
-          '<th style="text-align:center;padding:10px 16px;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#C13584;font-family:\'Helvetica Neue\',sans-serif;">Reels</th>' +
-          '<th style="text-align:center;padding:10px 16px;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#C13584;font-family:\'Helvetica Neue\',sans-serif;">Stories</th>' +
-          '<th style="text-align:center;padding:10px 16px;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#1a1a1a;font-family:\'Helvetica Neue\',sans-serif;">Total</th>' +
-        '</tr>' +
-        Object.entries(report.instagram_breakdown).map(([key, data]) => {
-          const sc = SCHOOL_CONFIG[key] || { accent: '#333', name: key.toUpperCase() };
-          const isIMM = key === 'imm';
-          const bg = isIMM ? '#f5f3ee' : '#fff';
-          return '<tr style="border-bottom:1px solid #e8e8e8;background:' + bg + ';">' +
-            '<td style="padding:14px 16px;font-size:13px;font-weight:' + (isIMM ? '700' : '400') + ';color:' + sc.accent + ';font-family:\'Helvetica Neue\',sans-serif;">' + (isIMM ? '★ ' : '') + sc.name + '</td>' +
-            '<td style="text-align:center;padding:14px 16px;font-size:16px;font-weight:700;color:#1a1a1a;font-family:\'Helvetica Neue\',sans-serif;">' + (data.posts || 0) + '</td>' +
-            '<td style="text-align:center;padding:14px 16px;font-size:16px;font-weight:700;color:#1a1a1a;font-family:\'Helvetica Neue\',sans-serif;">' + (data.reels || 0) + '</td>' +
-            '<td style="text-align:center;padding:14px 16px;font-size:16px;font-weight:700;color:#1a1a1a;font-family:\'Helvetica Neue\',sans-serif;">' + (data.stories || 0) + '</td>' +
-            '<td style="text-align:center;padding:14px 16px;font-size:20px;font-weight:700;color:' + sc.accent + ';font-family:\'Helvetica Neue\',sans-serif;">' + (data.total || 0) + '</td>' +
-          '</tr>';
-        }).join('') +
-      '</table>'
-    ) : '<p style="color:#aaa;font-size:13px;">No Instagram data available.</p>') +
-  '</div>' +
-
-  '<hr style="border:none;border-top:1px solid #e8e8e8;margin:0 64px;">' +
-
   '<!-- BIRDS EYE VIEW -->\n' +
   '<div class="section" style="background:#f5f3ee;">' +
     '<div style="text-align:center;margin-bottom:32px;">' +

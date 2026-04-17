@@ -7,51 +7,65 @@ export async function generateReport() {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
   });
 
-  console.log('[reporter] Generating full competitive report for', today);
+  const weekAgo = new Date();
+  weekAgo.setDate(weekAgo.getDate() - 7);
+  const weekAgoStr = weekAgo.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+  console.log('[reporter] Generating report for', today);
 
   const prompt = `Today is ${today}. You are a competitive intelligence analyst for Istituto Marangoni Miami (IMM).
 
-Search the web for recent activity (last 7 days) from ALL FIVE schools including IMM itself:
-1. Istituto Marangoni Miami (IMM) - Instagram: @istitutomarangoni_miami, Website: istitutomarangonimiami.com
-2. Miami Fashion Institute MDC - Instagram: @miamifashioninstitute
+IMPORTANT: Only include content published between ${weekAgoStr} and ${today} (2026 only). Ignore anything older.
+
+Search the web for recent 2026 activity from ALL FIVE schools:
+1. Istituto Marangoni Miami (IMM) - @istitutomarangoni_miami on Instagram, istitutomarangonimiami.com
+2. Miami Fashion Institute MDC - @miamifashioninstitute
 3. FIT New York - Fashion Institute of Technology
 4. SCAD - Savannah College of Art and Design
 5. Parsons School of Design New York
 
-For each school search: Instagram, LinkedIn, TikTok, press, blogs, newsletters, website updates.
+For Instagram specifically, try to count and distinguish between:
+- Regular posts (photos/carousels)
+- Reels (video content)
+- Stories (if visible)
+
+For each school also search: LinkedIn, TikTok, press coverage, blogs, newsletters, website updates from 2026 only.
 
 YOU MUST RESPOND WITH ONLY A JSON OBJECT. NO TEXT BEFORE OR AFTER. NO MARKDOWN. JUST RAW JSON.
 
 {
   "report_date": "${today}",
   "generated_at": "${new Date().toISOString()}",
+  "instagram_breakdown": {
+    "imm":     { "posts": 0, "reels": 0, "stories": 0, "total": 0 },
+    "mdc":     { "posts": 0, "reels": 0, "stories": 0, "total": 0 },
+    "fit":     { "posts": 0, "reels": 0, "stories": 0, "total": 0 },
+    "scad":    { "posts": 0, "reels": 0, "stories": 0, "total": 0 },
+    "parsons": { "posts": 0, "reels": 0, "stories": 0, "total": 0 }
+  },
   "birds_eye_view": {
-    "summary": "2-3 sentence overview of what all schools are focusing on this week",
+    "summary": "2-3 sentence overview of what all schools are focusing on this week in 2026",
     "programming_overview": [
-      {
-        "school": "IMM",
-        "focus": "main theme or campaign this week e.g. enrollment push, event, new program",
-        "activity_count": 3
-      },
-      { "school": "MDC", "focus": "...", "activity_count": 3 },
-      { "school": "FIT", "focus": "...", "activity_count": 3 },
-      { "school": "SCAD", "focus": "...", "activity_count": 3 },
-      { "school": "Parsons", "focus": "...", "activity_count": 3 }
+      { "school": "IMM",     "focus": "main theme this week", "activity_count": 3 },
+      { "school": "MDC",     "focus": "main theme this week", "activity_count": 3 },
+      { "school": "FIT",     "focus": "main theme this week", "activity_count": 3 },
+      { "school": "SCAD",    "focus": "main theme this week", "activity_count": 3 },
+      { "school": "Parsons", "focus": "main theme this week", "activity_count": 3 }
     ]
   },
   "differentials": [
     {
-      "metric": "e.g. Instagram Reels this week",
-      "imm_value": "1 reel",
+      "metric": "Instagram Reels this week",
+      "imm_value": "X reels",
       "competitor": "SCAD",
-      "competitor_value": "5 reels",
+      "competitor_value": "X reels",
       "gap": "behind",
       "note": "short observation"
     }
   ],
   "opportunities": [
     {
-      "opportunity": "Short action IMM could take",
+      "opportunity": "Specific action IMM could take this week",
       "based_on": "What competitor is doing well",
       "competitor": "FIT",
       "priority": "high"
@@ -64,7 +78,7 @@ YOU MUST RESPOND WITH ONLY A JSON OBJECT. NO TEXT BEFORE OR AFTER. NO MARKDOWN. 
       {
         "type": "event",
         "school": "school name",
-        "headline": "headline here",
+        "headline": "headline",
         "detail": "2-3 sentences why this matters for IMM",
         "urgency": "high"
       }
@@ -79,48 +93,27 @@ YOU MUST RESPOND WITH ONLY A JSON OBJECT. NO TEXT BEFORE OR AFTER. NO MARKDOWN. 
       "items": [
         {
           "platform": "instagram",
-          "title": "title here",
-          "snippet": "what IMM posted and its impact",
-          "url": "https://full-url-here.com",
-          "time": "2 days ago",
+          "title": "title",
+          "snippet": "what was posted and its impact — 2026 content only",
+          "url": "https://full-url.com",
+          "time": "X days ago",
           "engagement": "N/A"
         }
       ]
     },
-    {
-      "key": "mdc",
-      "name": "Miami Fashion Institute (MDC)",
-      "total_activities": 3,
-      "items": []
-    },
-    {
-      "key": "fit",
-      "name": "FIT New York",
-      "total_activities": 3,
-      "items": []
-    },
-    {
-      "key": "scad",
-      "name": "SCAD",
-      "total_activities": 3,
-      "items": []
-    },
-    {
-      "key": "parsons",
-      "name": "Parsons School of Design",
-      "total_activities": 3,
-      "items": []
-    }
+    { "key": "mdc",     "name": "Miami Fashion Institute (MDC)",  "total_activities": 3, "items": [] },
+    { "key": "fit",     "name": "FIT New York",                   "total_activities": 3, "items": [] },
+    { "key": "scad",    "name": "SCAD",                           "total_activities": 3, "items": [] },
+    { "key": "parsons", "name": "Parsons School of Design",       "total_activities": 3, "items": [] }
   ]
 }
 
 Rules:
+- ONLY include 2026 content from the last 7 days
 - URLs must always start with https://
 - Platform values: instagram, linkedin, tiktok, press, blog, newsletter, website
-- Find 3-5 real items per school
-- Be specific with numbers when comparing IMM to competitors
-- Opportunities should be actionable and specific
-- Return ONLY the JSON, nothing else`;
+- Be specific with Instagram post/reel/story counts
+- Return ONLY the JSON`;
 
   const response = await client.messages.create({
     model: 'claude-haiku-4-5-20251001',
@@ -153,6 +146,6 @@ Rules:
     });
   });
 
-  console.log('[reporter] Done: ' + report.schools.reduce((a, s) => a + (s.items ? s.items.length : 0), 0) + ' activities found across 5 schools');
+  console.log('[reporter] Done: ' + report.schools.reduce((a, s) => a + (s.items ? s.items.length : 0), 0) + ' activities across 5 schools');
   return report;
 }

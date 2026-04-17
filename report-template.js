@@ -2,6 +2,7 @@ const SCHOOL_CONFIG = {
   mdc:     { name: 'Miami Fashion Institute', short: 'MDC', accent: '#C0392B', logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/3/39/Miami_Dade_College_logo.svg/320px-Miami_Dade_College_logo.svg.png' },
   fit:     { name: 'FIT New York',            short: 'FIT', accent: '#1A3A5C', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/FIT_NYC_logo.svg/320px-FIT_NYC_logo.svg.png' },
   scad:    { name: 'SCAD',                    short: 'SCAD',accent: '#1A4731', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/SCAD_logo.svg/320px-SCAD_logo.svg.png' },
+  imm:     { name: 'Istituto Marangoni Miami', short: 'IMM', accent: '#000000', logo: 'https://www.istitutomarangonimiami.com/wp-content/uploads/2024/05/IMM-Logo.png' },
   parsons: { name: 'Parsons School of Design',short: 'PAR', accent: '#2C2C2C', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/New_School_logo.svg/320px-New_School_logo.svg.png' },
 };
 
@@ -201,6 +202,78 @@ export function generateReportHTML(report) {
     '<span style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#aaa;border:1px solid rgba(170,170,170,0.3);padding:4px 12px;">PARSONS</span>' +
     '<span style="margin-left:auto;font-size:9px;color:#555;letter-spacing:1px;text-transform:uppercase;">IG · LinkedIn · TikTok · Press · Blog · Newsletter · Web</span>' +
   '</div>' +
+
+  '<!-- BIRDS EYE VIEW -->\n' +
+  '<div class="section" style="background:#f5f3ee;">' +
+    '<div style="text-align:center;margin-bottom:32px;">' +
+      '<div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#aaa;margin-bottom:12px;">Birds Eye View</div>' +
+      '<div style="font-size:32px;font-weight:700;color:#1a1a1a;letter-spacing:-0.5px;">All Schools This Week</div>' +
+      '<div style="width:40px;height:2px;background:#1a1a1a;margin:16px auto 0;"></div>' +
+    '</div>' +
+    (report.birds_eye_view ? (
+      '<div style="font-size:14px;color:#555;line-height:1.8;margin-bottom:28px;font-style:italic;">' + (report.birds_eye_view.summary || '') + '</div>' +
+      '<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;">' +
+      (report.birds_eye_view.programming_overview || []).map(p => {
+        const sc = Object.values(SCHOOL_CONFIG).find(s => s.short === p.school) || { accent: '#333', short: p.school };
+        return '<div style="border-top:3px solid ' + sc.accent + ';padding:16px;background:#fff;">' +
+          '<div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:' + sc.accent + ';margin-bottom:8px;">' + p.school + '</div>' +
+          '<div style="font-size:12px;color:#333;line-height:1.6;margin-bottom:8px;">' + (p.focus || '') + '</div>' +
+          '<div style="font-size:20px;font-weight:700;color:' + sc.accent + ';">' + (p.activity_count || 0) + '</div>' +
+          '<div style="font-size:9px;color:#aaa;text-transform:uppercase;letter-spacing:1px;">activities</div>' +
+        '</div>';
+      }).join('') +
+      '</div>'
+    ) : '') +
+  '</div>' +
+
+  '<hr style="border:none;border-top:1px solid #e8e8e8;margin:0 64px;">' +
+
+  '<!-- DIFFERENTIALS -->\n' +
+  '<div class="section">' +
+    '<div style="text-align:center;margin-bottom:32px;">' +
+      '<div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#aaa;margin-bottom:12px;">IMM vs Competitors</div>' +
+      '<div style="font-size:32px;font-weight:700;color:#1a1a1a;letter-spacing:-0.5px;">Differentials & Gaps</div>' +
+      '<div style="width:40px;height:2px;background:#1a1a1a;margin:16px auto 0;"></div>' +
+    '</div>' +
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:40px;">' +
+    (report.differentials || []).map(d => {
+      const isAhead = d.gap === 'ahead';
+      const color = isAhead ? '#27AE60' : '#C0392B';
+      const bg = isAhead ? '#EAFAF1' : '#FDF3F2';
+      return '<div style="border-left:3px solid ' + color + ';padding:16px 20px;background:' + bg + ';">' +
+        '<div style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:' + color + ';margin-bottom:8px;">' + (isAhead ? '▲ IMM AHEAD' : '▼ IMM BEHIND') + ' · vs ' + d.competitor + '</div>' +
+        '<div style="font-size:14px;font-weight:700;color:#1a1a1a;margin-bottom:6px;">' + (d.metric || '') + '</div>' +
+        '<div style="display:flex;gap:16px;margin-bottom:8px;">' +
+          '<div style="font-size:12px;color:#333;"><strong>IMM:</strong> ' + (d.imm_value || '') + '</div>' +
+          '<div style="font-size:12px;color:#555;"><strong>' + d.competitor + ':</strong> ' + (d.competitor_value || '') + '</div>' +
+        '</div>' +
+        '<div style="font-size:11px;color:#666;">' + (d.note || '') + '</div>' +
+      '</div>';
+    }).join('') +
+    '</div>' +
+
+    '<div style="text-align:center;margin-bottom:32px;">' +
+      '<div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#aaa;margin-bottom:12px;">Based on Competitor Activity</div>' +
+      '<div style="font-size:32px;font-weight:700;color:#1a1a1a;letter-spacing:-0.5px;">Opportunities for IMM</div>' +
+      '<div style="width:40px;height:2px;background:#1a1a1a;margin:16px auto 0;"></div>' +
+    '</div>' +
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">' +
+    (report.opportunities || []).map((o, i) => {
+      const num = String(i + 1).padStart(2, '0');
+      const priorityColor = o.priority === 'high' ? '#C0392B' : o.priority === 'medium' ? '#D35400' : '#27AE60';
+      return '<div style="border:1px solid #e8e8e8;border-top:3px solid ' + priorityColor + ';padding:20px;">' +
+        '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">' +
+          '<span style="font-size:24px;font-weight:700;color:#e8e8e8;">' + num + '</span>' +
+          '<span style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:' + priorityColor + ';background:#fff;padding:2px 8px;border:1px solid ' + priorityColor + ';">' + (o.priority || 'medium').toUpperCase() + '</span>' +
+        '</div>' +
+        '<div style="font-size:14px;font-weight:700;color:#1a1a1a;line-height:1.4;margin-bottom:8px;">' + (o.opportunity || '') + '</div>' +
+        '<div style="font-size:12px;color:#666;line-height:1.6;"><strong>' + o.competitor + ':</strong> ' + (o.based_on || '') + '</div>' +
+      '</div>';
+    }).join('') +
+    '</div>' +
+  '</div>' +
+
+  '<hr style="border:none;border-top:1px solid #e8e8e8;margin:0 64px;">' +
 
   '<!-- EXECUTIVE SUMMARY -->\n' +
   '<div class="section">' +

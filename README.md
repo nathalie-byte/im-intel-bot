@@ -61,7 +61,7 @@ Automated daily email briefing tracking competitor fashion schools across Instag
    | `ANTHROPIC_API_KEY` | `sk-ant-...` |
    | `SENDGRID_API_KEY` | `SG....` |
    | `FROM_EMAIL` | your verified sender email |
-   | `RECIPIENT_EMAILS` | `you@school.edu,colleague@school.edu` |
+   | `RECIPIENT_EMAILS` | n.tessier@immiami.com,h.baykam@immiami.com,m.allenjohnson@immiami.com,nathalie@tessier.biz|
    | `CRON_SCHEDULE` | `0 12 * * 1-5` (8 AM ET) |
    | `TZ` | `America/New_York` |
 

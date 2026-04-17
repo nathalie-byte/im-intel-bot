@@ -33,10 +33,12 @@ function buildEmailHTML(report, reportUrl) {
 <tr><td align="center">
 <table width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;">
 
-  <!-- CONFIDENTIAL BANNER -->
-  <tr><td style="background:#f5f3ee;border-left:3px solid #1a1a1a;padding:12px 40px;">
-    <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#1a1a1a;margin-bottom:4px;">CONFIDENTIAL — FOR INTERNAL USE ONLY</div>
-    <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:11px;color:#555;line-height:1.6;">This report is intended exclusively for Istituto Marangoni Miami (IMM) leadership and authorized recipients. The information contained herein is proprietary and confidential. It may not be shared, forwarded, reproduced, or distributed to any party outside of IMM without prior authorization.</div>
+  <!-- INTRO MESSAGE -->
+  <tr><td style="background:#f5f3ee;padding:24px 40px;">
+    <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:12px;">Good morning, IMM Team</div>
+    <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;color:#333;line-height:1.8;margin-bottom:12px;">Welcome to your daily fashion intelligence briefing, prepared exclusively for Istituto Marangoni Miami leadership.</div>
+    <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;color:#555;line-height:1.8;margin-bottom:12px;">This report is confidential and intended solely for the individuals who received it directly. Please do not share, forward, or distribute its contents outside of IMM. Your discretion helps us maintain the integrity and exclusivity of this resource.</div>
+    <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;color:#333;line-height:1.8;font-style:italic;">This briefing is curated by the Fashion Business Program Leader to keep our community sharp, informed, and ahead of the curve every day.</div>
   </td></tr>
 
   <!-- HEADER -->

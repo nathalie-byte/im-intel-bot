@@ -188,7 +188,7 @@ export function generateReportHTML(report) {
         '<div style="font-size:12px;color:#aaa;letter-spacing:1px;margin-bottom:4px;">' + report_date + '</div>' +
         '<div style="font-size:11px;color:#ccc;">Istituto Marangoni Miami · Intelligence Unit</div>' +
         '<div style="margin-top:16px;padding-top:16px;border-top:1px solid #e8e8e8;">' +
-          '<div style="font-size:12px;font-weight:700;color:#1a1a1a;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;">Report created and published by Nathalie Tessier</div>' +
+          '<div style="font-size:18px;font-weight:700;color:#1a1a1a;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;letter-spacing:-0.3px;">Report created and published by Nathalie Tessier</div>' +
         '</div>' +
       '</div>' +
     '</div>' +
@@ -280,7 +280,7 @@ export function generateReportHTML(report) {
   '</div>' +
 
   '<div style="background:#f5f5f3;padding:16px 64px;border-top:1px solid #e8e8e8;">' +
-    '<div style="font-size:12px;font-weight:700;color:#1a1a1a;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;">Report created and published by Nathalie Tessier</div>' +
+    '<div style="font-size:18px;font-weight:700;color:#1a1a1a;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;letter-spacing:-0.3px;">Report created and published by Nathalie Tessier</div>' +
   '</div>' +
 
   '\n</div>\n</body>\n</html>';

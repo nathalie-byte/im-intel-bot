@@ -15,47 +15,38 @@ export async function generateReport() {
 
   const prompt = `Today is ${today}. You are a competitive intelligence analyst for Istituto Marangoni Miami (IMM).
 
-ONLY include content published between ${weekAgoStr} and ${today} (2026 only). Ignore anything older.
+IMPORTANT: Only include content published between ${weekAgoStr} and ${today} (2026 only). Ignore anything older.
 
-STEP 1 - Track IMM's own social media activity by searching these public accounts:
-- Instagram: https://www.instagram.com/istitutomarangonimiami/
-- LinkedIn: https://www.linkedin.com/school/istituto-marangoni-miami/
-- TikTok: https://www.tiktok.com/@istitutomarangonimiami
-- Facebook: https://www.facebook.com/IstitutoMarangoniMiami
+Search the web for recent 2026 activity from ALL FIVE schools:
+1. Istituto Marangoni Miami (IMM) - @istitutomarangoni_miami on Instagram, istitutomarangonimiami.com
+2. Miami Fashion Institute MDC - @miamifashioninstitute
+3. FIT New York - Fashion Institute of Technology
+4. SCAD - Savannah College of Art and Design
+5. Parsons School of Design New York
 
-For each IMM platform track:
-- Most recent posts (title or description)
-- Type of content: reel, carousel, photo, article, event, story
-- What is being promoted: admissions, events, student work, faculty, campus life, programs
-- Posting frequency this week
+For Instagram specifically, try to count and distinguish between:
+- Regular posts (photos/carousels)
+- Reels (video content)
+- Stories (if visible)
 
-STEP 2 - Track these competitor schools (last 7 days, 2026 only):
-- Miami Fashion Institute MDC @miamifashioninstitute
-- FIT New York Fashion Institute of Technology
-- SCAD Savannah College of Art and Design
-- Parsons School of Design New York
-
-Search Instagram, LinkedIn, TikTok, press, blogs, newsletters, websites for each competitor.
-
-STEP 3 - Compare IMM to competitors and identify:
-- Where IMM is behind (posting less, missing platforms)
-- Where IMM is ahead
-- Opportunities based on what competitors do well
+For each school also search: LinkedIn, TikTok, press coverage, blogs, newsletters, website updates from 2026 only.
 
 YOU MUST RESPOND WITH ONLY A JSON OBJECT. NO TEXT BEFORE OR AFTER. NO MARKDOWN. JUST RAW JSON.
 
 {
   "report_date": "${today}",
   "generated_at": "${new Date().toISOString()}",
-  "imm_win": {
-    "exists": true,
-    "headline": "This Week's Win for IMM",
-    "detail": "Describe the strongest IMM social media moment this week"
+  "instagram_breakdown": {
+    "imm":     { "posts": 0, "reels": 0, "stories": 0, "total": 0 },
+    "mdc":     { "posts": 0, "reels": 0, "stories": 0, "total": 0 },
+    "fit":     { "posts": 0, "reels": 0, "stories": 0, "total": 0 },
+    "scad":    { "posts": 0, "reels": 0, "stories": 0, "total": 0 },
+    "parsons": { "posts": 0, "reels": 0, "stories": 0, "total": 0 }
   },
   "birds_eye_view": {
-    "summary": "2-3 sentence overview of what all schools are focusing on this week",
+    "summary": "2-3 sentence overview of what all schools are focusing on this week in 2026",
     "programming_overview": [
-      { "school": "IMM",     "focus": "main theme or campaign this week", "activity_count": 3 },
+      { "school": "IMM",     "focus": "main theme this week", "activity_count": 3 },
       { "school": "MDC",     "focus": "main theme this week", "activity_count": 3 },
       { "school": "FIT",     "focus": "main theme this week", "activity_count": 3 },
       { "school": "SCAD",    "focus": "main theme this week", "activity_count": 3 },
@@ -64,19 +55,19 @@ YOU MUST RESPOND WITH ONLY A JSON OBJECT. NO TEXT BEFORE OR AFTER. NO MARKDOWN. 
   },
   "differentials": [
     {
-      "metric": "specific metric e.g. Instagram Reels posted this week",
-      "imm_value": "X",
-      "competitor": "school name",
-      "competitor_value": "X",
+      "metric": "Instagram Reels this week",
+      "imm_value": "X reels",
+      "competitor": "SCAD",
+      "competitor_value": "X reels",
       "gap": "behind",
       "note": "short observation"
     }
   ],
   "opportunities": [
     {
-      "opportunity": "Specific action IMM could take",
-      "based_on": "What competitor does well",
-      "competitor": "school name",
+      "opportunity": "Specific action IMM could take this week",
+      "based_on": "What competitor is doing well",
+      "competitor": "FIT",
       "priority": "high"
     }
   ],
@@ -88,8 +79,8 @@ YOU MUST RESPOND WITH ONLY A JSON OBJECT. NO TEXT BEFORE OR AFTER. NO MARKDOWN. 
         "type": "event",
         "school": "school name",
         "headline": "headline",
-        "detail": "why this matters for IMM",
-        "urgency": "medium"
+        "detail": "2-3 sentences why this matters for IMM",
+        "urgency": "high"
       }
     ],
     "recommended_action": "One specific action IMM should take this week"
@@ -98,15 +89,15 @@ YOU MUST RESPOND WITH ONLY A JSON OBJECT. NO TEXT BEFORE OR AFTER. NO MARKDOWN. 
     {
       "key": "imm",
       "name": "Istituto Marangoni Miami (IMM)",
-      "total_activities": 4,
+      "total_activities": 3,
       "items": [
         {
           "platform": "instagram",
-          "title": "Content title or description",
-          "snippet": "Type: reel/photo/carousel. Promoting: admissions/events/student work. Description of content.",
-          "url": "https://www.instagram.com/istitutomarangonimiami/",
+          "title": "title",
+          "snippet": "what was posted and its impact — 2026 content only",
+          "url": "https://full-url.com",
           "time": "X days ago",
-          "engagement": "X likes or N/A"
+          "engagement": "N/A"
         }
       ]
     },
@@ -118,10 +109,10 @@ YOU MUST RESPOND WITH ONLY A JSON OBJECT. NO TEXT BEFORE OR AFTER. NO MARKDOWN. 
 }
 
 Rules:
-- 2026 content only from the last 7 days
-- URLs must start with https://
-- Platform values: instagram, linkedin, tiktok, facebook, press, blog, newsletter, website
-- Find 4-6 real items for IMM, 3-5 for each competitor
+- ONLY include 2026 content from the last 7 days
+- URLs must always start with https://
+- Platform values: instagram, linkedin, tiktok, press, blog, newsletter, website
+- Be specific with Instagram post/reel/story counts
 - Return ONLY the JSON`;
 
   const response = await client.messages.create({
@@ -144,6 +135,7 @@ Rules:
 
   const report = JSON.parse(jsonText);
 
+  // Fix URLs missing https://
   report.schools.forEach(school => {
     (school.items || []).forEach(item => {
       if (item.url && item.url.length > 0) {

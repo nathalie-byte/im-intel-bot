@@ -14,6 +14,7 @@ const PLATFORM_CONFIG = {
   blog:       { label: 'Blog',       color: '#555555' },
   newsletter: { label: 'Newsletter', color: '#4A4A4A' },
   website:    { label: 'Website',    color: '#222222' },
+  facebook:   { label: 'Facebook',   color: '#1877F2' },
 };
 
 const PROGRAM_CONFIG = {
@@ -202,6 +203,20 @@ export function generateReportHTML(report) {
     '<span style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#aaa;border:1px solid rgba(170,170,170,0.3);padding:4px 12px;">PARSONS</span>' +
     '<span style="margin-left:auto;font-size:9px;color:#555;letter-spacing:1px;text-transform:uppercase;">IG · LinkedIn · TikTok · Press · Blog · Newsletter · Web</span>' +
   '</div>' +
+
+  '<!-- IMM WIN -->\n' +
+  (report.imm_win && report.imm_win.exists ? (
+    '<div style="background:#1a1a1a;padding:28px 64px;margin-bottom:0;">' +
+      '<div style="display:flex;align-items:center;gap:16px;">' +
+        '<div style="font-size:32px;">★</div>' +
+        '<div>' +
+          '<div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:6px;">This Week\'s Win for IMM</div>' +
+          '<div style="font-size:20px;font-weight:700;color:#fff;line-height:1.3;">' + (report.imm_win.headline || '') + '</div>' +
+          '<div style="font-size:13px;color:rgba(255,255,255,0.6);margin-top:8px;line-height:1.7;">' + (report.imm_win.detail || '') + '</div>' +
+        '</div>' +
+      '</div>' +
+    '</div>'
+  ) : '') +
 
   '<!-- BIRDS EYE VIEW -->\n' +
   '<div class="section" style="background:#f5f3ee;">' +

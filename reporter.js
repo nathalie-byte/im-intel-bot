@@ -20,7 +20,7 @@ Search the web thoroughly for the most recent 2026 content from these 5 fashion 
 4. SCAD - scad.edu
 5. Parsons School of Design - newschool.edu/parsons
 
-For IMM (school 1): Only search their official website for public announcements, events or news. Keep it brief — 2 items maximum. This is just for context.
+For IMM (school 1): Only search istitutomarangonimiami.com for content published in ${month}. Include ONLY what you can verify with a real URL from their website dated this month. If you cannot find anything from ${month}, return an empty items array. Do NOT invent, guess, or recycle old news. Do NOT include anything you cannot verify with a real current URL.
 
 For competitor schools (2-5) search ALL of these source types:
 - Their official website news and blog
@@ -33,7 +33,7 @@ For competitor schools (2-5) search ALL of these source types:
 - New program announcements or curriculum changes in 2026
 - Events, shows, competitions, collaborations in 2026
 
-Be very specific about dates — only include content from ${month} or the last 30 days.
+STRICT DATE RULE: Only include content published in ${month}. If you cannot confirm the content is from ${month}, do not include it. Never include content from previous months or years.
 For each item note: what platform/source it came from, what was being promoted, and why it matters for IMM competitively.
 
 IMPORTANT: Your entire response must be a single JSON object starting with { and ending with }. No text outside the JSON.

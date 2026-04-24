@@ -20,14 +20,12 @@ Search the web thoroughly for the most recent 2026 content from these 5 fashion 
 4. SCAD - scad.edu
 5. Parsons School of Design - newschool.edu/parsons
 
-For IMM (school 1): Search these exact public pages for content published in ${month}:
-- Instagram: https://www.instagram.com/istitutomarangoni_miami/
+For IMM (school 1): Search these sources for content published in ${month}:
 - LinkedIn: https://www.linkedin.com/company/istituto-marangoni-miami/posts/?feedView=all
-- Facebook: https://www.facebook.com/marangonimiami
 - Website: https://www.istitutomarangonimiami.com
-- Also search Google for: "Istituto Marangoni Miami" ${month} to find any press coverage
+- Google press search: "Istituto Marangoni Miami" ${month}
 
-Include up to 4 items from these sources. Only include content you can verify is from ${month}. Do NOT invent or recycle old news.
+Include up to 3 items. Only include content you can verify is from ${month} with a real URL. Do NOT invent or recycle old news.
 
 For competitor schools (2-5) search ALL of these source types:
 - Their official website news and blog
